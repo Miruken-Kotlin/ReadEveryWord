@@ -9,7 +9,7 @@ import research.app1.databinding.ABinding
 class AController : Controller(), Message {
 
     fun showA() {
-        show<ABinding>(R.layout.a).let {
+        push<ABinding>(R.layout.a).let {
             it.ctrl = this
         }
     }

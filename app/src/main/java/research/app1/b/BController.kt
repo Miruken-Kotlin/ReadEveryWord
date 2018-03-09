@@ -9,7 +9,7 @@ import research.app1.databinding.BBinding
 class BController : Controller(), Message {
 
     fun showB(){
-        show<BBinding>(R.layout.b).let{
+        push<BBinding>(R.layout.b).let{
             it.ctrl = this
         }
     }
