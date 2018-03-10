@@ -1,15 +1,10 @@
 package research.app1.infrastructure
 
-import android.animation.ObjectAnimator
 import android.app.Activity
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
-import android.transition.Fade
-import android.transition.Fade.IN
-import android.transition.Fade.OUT
-import android.transition.Scene
-import android.transition.TransitionManager
 import android.view.View
+import android.widget.RelativeLayout
 
 open class Controller {
 
@@ -24,6 +19,7 @@ open class Controller {
     }
 
     fun push(view: View) : View {
+        constrain(view)
         animate(view)
         views.add(view)
         region.addView(view)
@@ -34,40 +30,35 @@ open class Controller {
         return DataBindingUtil.bind<T>(push(view))
     }
 
+    fun constrain(view: View) : View {
+
+        var layoutParams = RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.MATCH_PARENT)
+        view.layoutParams = layoutParams
+
+        return view
+    }
+
     fun animate(view: View) : View {
 
-        //With property animator
-        val shortDuration = 5000L
+        val shortDuration = 500L
 
         //out with the old view if it exists
         if(views.any()){
             views.last().animate().apply {
                 alpha(0f)
                 duration = shortDuration
-                //setListener(null)
             }
         }
+
         //in with the new view
         view.alpha = 0f
         view.visibility = View.VISIBLE
         view.animate().apply {
             alpha(1f)
             duration = shortDuration
-            //setListener(null)
         }
-
-        //With Scene and Transition Manager
-//        if(views.any()){
-//            val scene = Scene(region, views.last())
-//            TransitionManager.go(scene, Fade(OUT))
-//        }
-
-        //With ObjectAnimator
-//        view.x = -500f
-//        ObjectAnimator.ofFloat(view, "translationX", 0f).apply {
-//            duration = 500
-//            start()
-//        }
 
         return view
     }

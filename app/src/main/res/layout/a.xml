@@ -1,35 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
-       <variable
-           name="ctrl"
-           type="research.app1.a.AController"/>
+        <variable
+            name="ctrl"
+            type="research.app1.a.AController"/>
     </data>
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:background="@color/lightBackground">
 
         <TextView
+            android:id="@+id/textView"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_width="100dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:text="@{ctrl.message}"
-            android:background="@color/colorAccent"/>
-
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="100dp"
-            android:text="Text 2 Foo"
-            android:background="@color/colorPrimary"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button"
-            android:layout_width="match_parent"
+            android:id="@+id/button2"
+            android:layout_width="128dp"
             android:layout_height="wrap_content"
-            android:text="Go to B"
-            android:onClick="@{() -> ctrl.goToB()}"/>
-
-
-    </LinearLayout>
+            android:layout_marginTop="16dp"
+            android:onClick="@{() -> ctrl.goToB()}"
+            android:text="Go To B"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+    </android.support.constraint.ConstraintLayout>
 </layout>

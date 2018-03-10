@@ -1,6 +1,6 @@
 package research.app1.infrastructure
 
 import android.content.Context
-import android.support.constraint.ConstraintLayout
+import android.widget.RelativeLayout
 
-class Region constructor(context: Context) : ConstraintLayout(context)
+class Region constructor(context: Context) : RelativeLayout(context)
