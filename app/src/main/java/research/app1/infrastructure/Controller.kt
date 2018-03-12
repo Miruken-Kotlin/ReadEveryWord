@@ -14,6 +14,10 @@ open class Controller {
         return activity.layoutInflater.inflate(view, null)
     }
 
+    fun <T : ViewDataBinding?>bind(view: View) : T {
+        return DataBindingUtil.bind<T>(view)
+    }
+
     fun push(view: Int) : View {
         return push(inflate(view))
     }
@@ -27,7 +31,7 @@ open class Controller {
     }
 
     fun <T : ViewDataBinding?>push(view: Int) : T {
-        return DataBindingUtil.bind<T>(push(view))
+        return bind<T>(push(view))
     }
 
     fun constrain(view: View) : View {
@@ -61,6 +65,10 @@ open class Controller {
         }
 
         return view
+    }
+
+    fun pop() {
+
     }
 
     companion object {
