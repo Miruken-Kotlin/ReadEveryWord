@@ -8,7 +8,6 @@ import android.widget.RelativeLayout
 
 open class Controller {
 
-    var views: MutableList<View> = mutableListOf()
 
     fun inflate(view: Int) : View {
         return activity.layoutInflater.inflate(view, null)
@@ -68,10 +67,18 @@ open class Controller {
     }
 
     fun pop() {
-
+        if(views.any())
+        {
+            val last = views.last()
+            region.removeView(last)
+            views.remove(last)
+        }
+        if(views.any())
+            views.last().alpha = 1f
     }
 
     companion object {
+        var views: MutableList<View> = mutableListOf()
         lateinit var activity: Activity
         lateinit var region:   Region
     }
