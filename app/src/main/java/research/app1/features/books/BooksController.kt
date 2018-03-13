@@ -1,4 +1,4 @@
-package research.app1.books
+package research.app1.features.books
 
 import android.content.Context
 import android.databinding.DataBindingUtil
@@ -9,7 +9,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.GridView
 import research.app1.R
-import research.app1.chapters.ChaptersController
+import research.app1.features.chapters.ChaptersController
 import research.app1.databinding.BooksNotstartedBinding
 import research.app1.domain.Bible
 import research.app1.domain.Book

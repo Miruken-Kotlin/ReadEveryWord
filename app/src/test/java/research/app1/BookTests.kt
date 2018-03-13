@@ -4,6 +4,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import research.app1.domain.Book
+import research.app1.features.ReadState
 
 class BookTests {
 
@@ -22,20 +23,20 @@ class BookTests {
 
     @Test
     fun is_not_started(){
-        assertEquals(false, book?.started)
+        assertEquals(ReadState.NOT_STARTED, book?.readState)
     }
 
     @Test
     fun is_started(){
         book?.chapters?.first()?.read = true
-        assertEquals(true, book?.started)
+        assertEquals(ReadState.STARTED, book?.readState)
     }
 
     @Test
     fun is_completed(){
         book?.chapters?.first()?.read = true
         book?.chapters?.last()?.read = true
-        assertEquals(true, book?.completed)
+        assertEquals(ReadState.COMPLETED, book?.readState)
     }
 
     @Test

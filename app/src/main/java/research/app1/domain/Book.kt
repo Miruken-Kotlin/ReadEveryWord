@@ -4,6 +4,7 @@ import android.databinding.BaseObservable
 import android.databinding.Bindable
 import android.databinding.Observable
 import research.app1.BR
+import research.app1.features.ReadState
 
 class Book(val longName: String, val shortName: String, val chapterCount: Int) : BaseObservable()
 {
@@ -11,8 +12,7 @@ class Book(val longName: String, val shortName: String, val chapterCount: Int) :
 
     private val chapterCallback = object : Observable.OnPropertyChangedCallback() {
         override fun onPropertyChanged(observable: Observable, i: Int) {
-            notifyPropertyChanged(BR.started)
-            notifyPropertyChanged(BR.completed)
+            notifyPropertyChanged(BR.readState)
             notifyPropertyChanged(BR.progress)
         }
     }
@@ -24,14 +24,6 @@ class Book(val longName: String, val shortName: String, val chapterCount: Int) :
     }
 
     @Bindable
-    var started : Boolean = false
-        get() = chapters.any { x -> x.read }
-
-    @Bindable
-    var completed : Boolean = false
-        get() = chapters.all { x -> x.read }
-
-    @Bindable
     var progress: String = ""
         get(){
             val current =
@@ -40,5 +32,16 @@ class Book(val longName: String, val shortName: String, val chapterCount: Int) :
                 100
 
             return "%.0f".format(current) + "%"
+        }
+
+    @Bindable
+    var readState: ReadState = ReadState.NOT_STARTED
+        get(){
+            return if(chapters.all { x -> x.read })
+                ReadState.COMPLETED
+            else if (chapters.any { x -> x.read })
+                ReadState.STARTED
+            else
+                ReadState.NOT_STARTED
         }
 }

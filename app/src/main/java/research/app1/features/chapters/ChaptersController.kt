@@ -1,4 +1,4 @@
-package research.app1.chapters
+package research.app1.features.chapters
 
 import android.content.Context
 import android.databinding.DataBindingUtil

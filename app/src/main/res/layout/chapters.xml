@@ -6,7 +6,7 @@
     <data>
         <variable
             name="ctrl"
-            type="research.app1.chapters.ChaptersController" />
+            type="research.app1.features.chapters.ChaptersController" />
     </data>
 
     <android.support.constraint.ConstraintLayout

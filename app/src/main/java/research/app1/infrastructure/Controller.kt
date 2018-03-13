@@ -9,7 +9,6 @@ import android.widget.RelativeLayout
 
 open class Controller {
 
-
     fun inflate(view: Int) : View {
         return activity.layoutInflater.inflate(view, null)
     }
