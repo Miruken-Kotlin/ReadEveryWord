@@ -7,7 +7,7 @@ import research.app1.domain.Book
 
 class BookTests {
 
-    var book: Book? = null
+    private var book: Book? = null
 
     @Before
     fun setup(){
@@ -36,5 +36,23 @@ class BookTests {
         book?.chapters?.first()?.read = true
         book?.chapters?.last()?.read = true
         assertEquals(true, book?.completed)
+    }
+
+    @Test
+    fun progress_At_0(){
+        assertEquals("0%", book?.progress)
+    }
+
+    @Test
+    fun progress_At_50(){
+        book?.chapters?.first()?.read = true
+        assertEquals("50%", book?.progress)
+    }
+
+    @Test
+    fun progress_At_100(){
+        book?.chapters?.first()?.read = true
+        book?.chapters?.last()?.read = true
+        assertEquals("100%", book?.progress)
     }
 }

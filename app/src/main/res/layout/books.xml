@@ -8,19 +8,18 @@
     android:background="@color/lightBackground">
 
     <TextView
+        style="@style/HeaderText"
         android:id="@+id/otText"
+        android:text="Old Testament"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:padding="8dp"
-        android:background="@color/primaryDarkColor"
-        android:textColor="@color/primaryTextColor"
-        android:text="Old Testament"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <GridView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/ot_grid"
@@ -36,7 +35,8 @@
         android:verticalSpacing="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/otText" />
+        app:layout_constraintTop_toBottomOf="@+id/otText"
+        tools:listitem="@layout/books_notstarted"/>
 
     <TextView
         android:id="@+id/ntText"
@@ -67,6 +67,7 @@
         android:verticalSpacing="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ntText" />
+        app:layout_constraintTop_toBottomOf="@+id/ntText"
+        tools:listitem="@layout/books_complete"/>
 
 </android.support.constraint.ConstraintLayout>

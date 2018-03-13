@@ -1,4 +1,4 @@
-package research.app1.tests
+package research.app1
 
 import org.junit.Test
 

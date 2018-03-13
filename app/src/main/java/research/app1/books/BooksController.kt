@@ -17,9 +17,12 @@ import research.app1.infrastructure.Controller
 
 class BooksController : Controller(), AdapterView.OnItemClickListener {
     fun showBooks(){
-        var bible = Bible()
+        val bible = Bible()
+        bible.books[0].chapters.forEach{
+            it.read = it.number % 2 == 0
+        }
 
-        var view = inflate(R.layout.books)
+        val view = inflate(R.layout.books)
 
         view.findViewById<GridView>(R.id.ot_grid).also{
             it.adapter = BookAdapter(bible.oldTestament)
@@ -47,7 +50,7 @@ class BookAdapter(books: List<Book>) : ArrayAdapter<Book>(Controller.region.cont
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        var currentBook = getItem(position)
+        val currentBook = getItem(position)
         return inflate(R.layout.books_notstarted).also {
             DataBindingUtil.bind<BooksNotstartedBinding>(it).apply {
                 book = currentBook

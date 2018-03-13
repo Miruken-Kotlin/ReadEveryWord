@@ -1,5 +1,6 @@
 package research.app1.infrastructure
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
@@ -17,7 +18,7 @@ open class Controller {
         return DataBindingUtil.bind<T>(view)
     }
 
-    fun push(view: Int) : View {
+    private fun push(view: Int) : View {
         return push(inflate(view))
     }
 
@@ -33,9 +34,9 @@ open class Controller {
         return bind<T>(push(view))
     }
 
-    fun constrain(view: View) : View {
+    private fun constrain(view: View) : View {
 
-        var layoutParams = RelativeLayout.LayoutParams(
+        val layoutParams = RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.MATCH_PARENT)
         view.layoutParams = layoutParams
@@ -43,7 +44,7 @@ open class Controller {
         return view
     }
 
-    fun animate(view: View) : View {
+    private fun animate(view: View) : View {
 
         val shortDuration = 500L
 
@@ -79,6 +80,7 @@ open class Controller {
 
     companion object {
         var views: MutableList<View> = mutableListOf()
+        @SuppressLint("StaticFieldLeak")
         lateinit var activity: Activity
         lateinit var region:   Region
     }
