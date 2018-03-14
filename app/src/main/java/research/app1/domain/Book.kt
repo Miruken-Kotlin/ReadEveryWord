@@ -38,7 +38,7 @@ class Book(val longName: String, val shortName: String, val chapterCount: Int) :
             return when {
                 chapters.all { x -> x.read } -> ReadState.COMPLETED
                 chapters.any { x -> x.read } -> ReadState.STARTED
-                else -> ReadState.NOT_STARTED
+                else                         -> ReadState.NOT_STARTED
             }
         }
 }
