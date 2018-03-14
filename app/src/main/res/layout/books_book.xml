@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
@@ -7,11 +8,10 @@
             type="research.app1.domain.Book"/>
     </data>
     <TextView
-        readState="@{book.readState}"
-        tools:text="Gen"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@{book.shortName}"
-        android:textAlignment="center"
-        android:padding="8dp"/>
+        android:layout_width ="match_parent"
+        android:layout_height="wrap_content"
+        style        ="@style/ReadStateDefault"
+        readState    ="@{book.readState}"
+        android:text ="@{book.shortName}"
+        tools:text   ="Gen"/>
 </layout>
