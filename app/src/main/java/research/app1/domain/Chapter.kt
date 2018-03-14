@@ -3,6 +3,7 @@ package research.app1.domain
 import android.databinding.BaseObservable
 import android.databinding.Bindable
 import research.app1.BR
+import research.app1.features.ReadState
 
 class Chapter(val number: Int) : BaseObservable() {
 
@@ -11,6 +12,7 @@ class Chapter(val number: Int) : BaseObservable() {
         set(value) {
             field = value
             notifyPropertyChanged(BR.read)
+            notifyPropertyChanged(BR.readState)
         }
 
     val numberText: String
@@ -19,4 +21,13 @@ class Chapter(val number: Int) : BaseObservable() {
     fun toggle(){
         read = !read
     }
+
+    @Bindable
+    var readState: ReadState = ReadState.NOT_STARTED
+        get(){
+            return when {
+                read -> ReadState.COMPLETED
+                else -> ReadState.NOT_STARTED
+            }
+        }
 }

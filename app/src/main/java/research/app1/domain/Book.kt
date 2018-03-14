@@ -5,6 +5,7 @@ import android.databinding.Bindable
 import android.databinding.Observable
 import research.app1.BR
 import research.app1.features.ReadState
+import research.app1.features.calculateProgress
 
 class Book(val longName: String, val shortName: String, val chapterCount: Int) : BaseObservable()
 {
@@ -26,22 +27,18 @@ class Book(val longName: String, val shortName: String, val chapterCount: Int) :
     @Bindable
     var progress: String = ""
         get(){
-            val current =
-                chapters.filter { x -> x.read }.count().toFloat() /
-                chapterCount.toFloat() *
-                100
-
-            return "%.0f".format(current) + "%"
+            return calculateProgress(
+                chapters.filter { x -> x.read }.count(),
+                chapterCount)
         }
 
     @Bindable
     var readState: ReadState = ReadState.NOT_STARTED
         get(){
-            return if(chapters.all { x -> x.read })
-                ReadState.COMPLETED
-            else if (chapters.any { x -> x.read })
-                ReadState.STARTED
-            else
-                ReadState.NOT_STARTED
+            return when {
+                chapters.all { x -> x.read } -> ReadState.COMPLETED
+                chapters.any { x -> x.read } -> ReadState.STARTED
+                else -> ReadState.NOT_STARTED
+            }
         }
 }

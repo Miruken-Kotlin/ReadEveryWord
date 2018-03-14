@@ -71,7 +71,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/bookText"
             app:layout_constraintVertical_bias="0.0"
-            tools:listitem="@layout/chapters_not_read" />
+            tools:listitem="@layout/chapters_chapter" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>
