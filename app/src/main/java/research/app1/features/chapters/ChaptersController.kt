@@ -13,6 +13,7 @@ import research.app1.databinding.ChaptersBinding
 import research.app1.databinding.ChaptersChapterBinding
 import research.app1.domain.Book
 import research.app1.domain.Chapter
+import research.app1.features.SingleViewAdapter
 import research.app1.infrastructure.Controller
 
 class  ChaptersController : Controller()
@@ -42,22 +43,7 @@ class  ChaptersController : Controller()
     }
 }
 
-class ChapterAdapter(chapters: List<Chapter>) :
-        ArrayAdapter<Chapter>(Controller.region.context, 0, chapters)
-{
-    private fun inflate(view: Int) : View {
-        return (context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater)
-                .inflate(view, null)
-    }
-
-    override fun getViewTypeCount(): Int {
-        return 1
-    }
-
-    override fun getItemViewType(position: Int): Int {
-        return 0
-    }
-
+class ChapterAdapter(chapters: List<Chapter>) : SingleViewAdapter<Chapter>(chapters) {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view = convertView ?: inflate(R.layout.chapters_chapter).also {
             it.tag = DataBindingUtil.bind<ChaptersChapterBinding>(it)

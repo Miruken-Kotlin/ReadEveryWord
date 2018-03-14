@@ -13,6 +13,7 @@ import research.app1.databinding.BooksBookBinding
 import research.app1.features.chapters.ChaptersController
 import research.app1.domain.Bible
 import research.app1.domain.Book
+import research.app1.features.SingleViewAdapter
 import research.app1.infrastructure.Controller
 
 class BooksController : Controller() {
@@ -38,24 +39,17 @@ class BooksController : Controller() {
     }
 
     private val goToChapters = AdapterView.OnItemClickListener { _, view, _, _ ->
-        val book = view?.tag as Book
-        ChaptersController().showChapters(book)
+        val book = (view?.tag as BooksBookBinding).book
+        ChaptersController().showChapters(book!!)
     }
 }
 
-class BookAdapter(books: List<Book>) : ArrayAdapter<Book>(Controller.region.context, 0, books){
-    private fun inflate(view: Int) : View {
-        return (context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater)
-                .inflate(view, null)
-    }
-
+class BookAdapter(books: List<Book>) : SingleViewAdapter<Book>(books) {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val currentBook = getItem(position)
-        return inflate(R.layout.books_book).also {
-            DataBindingUtil.bind<BooksBookBinding>(it).apply {
-                book = currentBook
-            }
-            it.tag = currentBook
+        val view = convertView ?: inflate(R.layout.books_book).also {
+            it.tag = DataBindingUtil.bind<BooksBookBinding>(it)
         }
+        (view.tag as BooksBookBinding).book = getItem(position)
+        return view
     }
 }
