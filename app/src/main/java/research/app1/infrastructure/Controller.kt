@@ -4,17 +4,35 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.RelativeLayout
 
 open class Controller {
 
+    val layoutInflater: LayoutInflater
+        get() = activity.layoutInflater
+
     fun inflate(view: Int) : View {
-        return activity.layoutInflater.inflate(view, null)
+        return inflate(view, null )
+    }
+
+    fun inflate(view: Int, parent: ViewGroup?) : View {
+        return inflate(view, parent, true)
+    }
+
+    fun inflate(view: Int, parent: ViewGroup?, attach: Boolean) : View {
+        return layoutInflater.inflate(view, parent, attach)
     }
 
     fun <T : ViewDataBinding?>bind(view: View) : T {
         return DataBindingUtil.bind<T>(view)
+    }
+
+    fun <T: ViewDataBinding>bind(view: Int, parent: ViewGroup) : T {
+        return DataBindingUtil
+                .inflate(layoutInflater, view, parent, true)
     }
 
     private fun push(view: Int) : View {

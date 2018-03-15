@@ -24,12 +24,13 @@ class Book(val longName: String, val shortName: String, val chapterCount: Int) :
         }
     }
 
+    val readCount: Int
+        get() = chapters.filter { x -> x.read }.count()
+
     @Bindable
     var progress: String = ""
         get(){
-            return calculateProgress(
-                chapters.filter { x -> x.read }.count(),
-                chapterCount)
+            return calculateProgress(readCount, chapterCount)
         }
 
     @Bindable

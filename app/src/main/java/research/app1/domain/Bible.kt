@@ -71,8 +71,17 @@ class Bible {
         Book("Revelation",      "Rev", 22)
     )
 
-    val oldTestament = books.take(39)
+    val oldTestament  = books.take(39)
+    val law           = oldTestament.take(5)
+    val history       = oldTestament.drop(5).take(12)
+    val wisdom        = oldTestament.drop(17).take(5)
+    val majorProphets = oldTestament.drop(22).take(5)
+    val minorProphets = oldTestament.takeLast(12)
 
     val newTestament = books.takeLast(27)
+    val gospels      = newTestament.take(4)
+    val acts         = newTestament.drop(4).take(1)
+    val epistles     = newTestament.drop(5).take(21)
+    val revelation   = newTestament.last()
 }
 

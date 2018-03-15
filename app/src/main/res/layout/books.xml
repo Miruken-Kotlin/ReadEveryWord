@@ -1,73 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+
+<android.widget.ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lightBackground">
+    android:layout_width="match_parent">
 
-    <TextView
-        style="@style/HeaderText"
-        android:id="@+id/otText"
-        android:text="Old Testament"
-        android:layout_width="0dp"
+    <android.support.constraint.ConstraintLayout
+        android:layout_width ="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        android:background   ="@color/lightBackground">
 
-    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/ot_grid"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:horizontalSpacing="8dp"
-        android:numColumns="6"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/otText"
-        tools:listitem="@layout/books_book"/>
+        <TextView
+            android:id  ="@+id/otText"
+            style       ="@style/HeaderText"
+            android:text="@string/old_testament"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/ntText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:padding="8dp"
-        android:background="@color/primaryDarkColor"
-        android:textColor="@color/primaryTextColor"
-        android:text="New Testament"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ot_grid"/>
+        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/ot_table"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:stretchColumns="*"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/otText">
 
-    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/nt_grid"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:horizontalSpacing="8dp"
-        android:numColumns="6"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ntText"
-        tools:listitem="@layout/books_complete"/>
+            <TableRow>
+                <include layout="@layout/books_book" />
+                <include layout="@layout/books_book" />
+                <include layout="@layout/books_book" />
+                <include layout="@layout/books_book" />
+                <include layout="@layout/books_book" />
+                <include layout="@layout/books_book" />
+            </TableRow>
+        </TableLayout>
 
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id  ="@+id/ntText"
+            style       ="@style/HeaderText"
+            android:text="@string/new_testament"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ot_table"/>
+
+        <TableLayout
+            android:id="@+id/nt_table"
+            android:stretchColumns="*"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:horizontalSpacing="8dp"
+            android:verticalSpacing="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ntText">
+
+            <TableRow>
+                <include layout="@layout/books_book" />
+                <include layout="@layout/books_book" />
+                <include layout="@layout/books_book" />
+                <include layout="@layout/books_book" />
+                <include layout="@layout/books_book" />
+                <include layout="@layout/books_book" />
+            </TableRow>
+        </TableLayout>
+    </android.support.constraint.ConstraintLayout>
+</android.widget.ScrollView>

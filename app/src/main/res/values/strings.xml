@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Read Every Word</string>
+    <string name="old_testament">Old Testament</string>
+    <string name="new_testament">New Testament</string>
 </resources>
