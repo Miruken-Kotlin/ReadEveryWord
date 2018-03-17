@@ -21,4 +21,12 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="ProgressName" parent="TextAppearance.AppCompat">
+        <item name="android:padding">8dp</item>
+    </style>
+
+    <style name="ProgressPercent" parent="ProgressName">
+        <item name="android:gravity">right</item>
+    </style>
+
 </resources>

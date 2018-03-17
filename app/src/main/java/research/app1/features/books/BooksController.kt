@@ -2,13 +2,14 @@ package research.app1.features.books
 
 import android.widget.*
 import research.app1.R
+import research.app1.databinding.BooksBinding
 import research.app1.domain.Bible
 import research.app1.domain.Book
 import research.app1.infrastructure.Controller
 
 class BooksController : Controller() {
 
-    private val bible: Bible = Bible()
+    val bible: Bible = Bible()
     init {
         fun readAll(book: Book){
             book.chapters.forEach {
@@ -37,6 +38,7 @@ class BooksController : Controller() {
 
     fun showBooks(){
         val view = inflate(R.layout.books)
+        bind<BooksBinding>(view).ctrl = this
 
         fun fillTable(table: TableLayout, items: List<Book>){
             table.removeAllViews()
@@ -60,6 +62,14 @@ class BooksController : Controller() {
         }
 
         push(view)
+    }
+
+    fun goToOldTestamentProgress(){
+        OldTestamentProgressController().showProgress(bible)
+    }
+
+    fun goToNewTestamentProgress(){
+        NewTestamentProgressController().showProgress(bible)
     }
 }
 

@@ -1,6 +1,12 @@
 package research.app1.domain
 
-class Bible {
+import android.databinding.BaseObservable
+import android.databinding.Bindable
+import android.databinding.Observable
+import research.app1.BR
+import research.app1.features.calculateProgress
+
+class Bible : BaseObservable() {
 
     val books = arrayListOf(
         Book("Genesis",         "Gen", 50),
@@ -71,6 +77,21 @@ class Bible {
         Book("Revelation",      "Rev", 22)
     )
 
+    private val chapterCallback = object : Observable.OnPropertyChangedCallback() {
+        override fun onPropertyChanged(observable: Observable, i: Int) {
+            notifyPropertyChanged(BR.oldTestamentProgress)
+            notifyPropertyChanged(BR.newTestamentProgress)
+        }
+    }
+
+    init {
+        books.flatMap {
+            it.chapters
+        }.forEach{
+            it.addOnPropertyChangedCallback(chapterCallback)
+        }
+    }
+
     val oldTestament  = books.take(39)
     val law           = oldTestament.take(5)
     val history       = oldTestament.drop(5).take(12)
@@ -83,5 +104,32 @@ class Bible {
     val acts         = newTestament.drop(4).take(1)
     val epistles     = newTestament.drop(5).take(21)
     val revelation   = newTestament.last()
+
+    @Bindable
+    var oldTestamentProgress: String = ""
+        get(){
+            return calculateProgress(oldTestament)
+        }
+
+    @Bindable
+    var newTestamentProgress: String = ""
+        get(){
+            return calculateProgress(newTestament)
+        }
+}
+
+class OldTestamentProgress(bible: Bible){
+    val law:           String = calculateProgress(bible.law)
+    val history:       String = calculateProgress(bible.history)
+    val wisdom:        String = calculateProgress(bible.wisdom)
+    val majorProphets: String = calculateProgress(bible.majorProphets)
+    val minorProphets: String = calculateProgress(bible.minorProphets)
+}
+
+class NewTestamentProgress(bible: Bible){
+    val gospels:    String = calculateProgress(bible.gospels)
+    val acts:       String = calculateProgress(bible.acts)
+    val epistles:   String = calculateProgress(bible.epistles)
+    val revelation: String = calculateProgress(bible.revelation)
 }
 
