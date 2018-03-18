@@ -11,11 +11,12 @@
     </data>
     <android.widget.ScrollView
         android:layout_height="match_parent"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        android:background   ="@color/lightBackground">
+
         <android.support.constraint.ConstraintLayout
             android:layout_width ="match_parent"
-            android:layout_height="wrap_content"
-            android:background   ="@color/lightBackground">
+            android:layout_height="wrap_content">
 
             <Button
                 android:id="@+id/button"
@@ -56,12 +57,14 @@
 
             <TableLayout
                 android:id="@+id/progress_table"
-                android:stretchColumns="*"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:stretchColumns="*"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ntProgress">
@@ -74,16 +77,17 @@
                         style="@style/ProgressName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Gospels"/>
+                        android:text="Gospels" />
 
                     <TextView
                         style="@style/ProgressPercent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{ctrl.progress.gospels}"
-                        tools:text = "0%"/>
+                        tools:text="0%" />
 
                 </TableRow>
+
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -92,16 +96,17 @@
                         style="@style/ProgressName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Acts of the Apostles"/>
+                        android:text="Acts of the Apostles" />
 
                     <TextView
                         style="@style/ProgressPercent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{ctrl.progress.acts}"
-                        tools:text = "0%"/>
+                        tools:text="0%" />
 
                 </TableRow>
+
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -110,16 +115,17 @@
                         style="@style/ProgressName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Epistles"/>
+                        android:text="Epistles" />
 
                     <TextView
                         style="@style/ProgressPercent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{ctrl.progress.epistles}"
-                        tools:text = "0%"/>
+                        tools:text="0%" />
 
                 </TableRow>
+
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -128,14 +134,14 @@
                         style="@style/ProgressName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Revelation"/>
+                        android:text="Revelation" />
 
                     <TextView
                         style="@style/ProgressPercent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{ctrl.progress.revelation}"
-                        tools:text = "0%"/>
+                        tools:text="0%" />
                 </TableRow>
             </TableLayout>
 
