@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
-            name="foo"
+            name="ctrl"
             type="research.app1.features.chapters.ChapterController"/>
     </data>
     <TextView
         android:layout_width ="match_parent"
         android:layout_height="match_parent"
         style          ="@style/ReadStateDefault"
-        readState      ="@{foo.chapter.readState}"
-        android:text   ="@{foo.chapter.numberText}"
-        android:onClick="@{() -> foo.chapter.toggle()}"
+        readState      ="@{ctrl.chapter.readState}"
+        android:text   ="@{ctrl.chapter.numberText}"
+        android:onClick="@{() -> ctrl.markAsRead()}"
         tools:text     ="1"/>
 </layout>

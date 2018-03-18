@@ -8,11 +8,11 @@ import research.app1.features.calculateProgress
 
 class ProgressTests {
 
-    private var book: Book = Book("Foo", "Fo", 2)
+    private var book: Book = Book(1,"Foo", "Fo", 2)
 
     @Before
     fun setup(){
-       book = Book("Foo", "Fo", 2)
+       book = Book(1,"Foo", "Fo", 2)
     }
 
     @Test

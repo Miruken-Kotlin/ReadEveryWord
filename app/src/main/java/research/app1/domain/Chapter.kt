@@ -7,6 +7,8 @@ import research.app1.features.ReadState
 
 class Chapter(val number: Int) : BaseObservable() {
 
+    val id: Int = number - 1
+
     @Bindable
     var read: Boolean = false
         set(value) {

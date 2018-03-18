@@ -12,7 +12,7 @@ class BookTests {
 
     @Before
     fun setup(){
-       book = Book("Foo", "Fo", 2)
+       book = Book(1, "Foo", "Fo", 2)
     }
 
     @Test

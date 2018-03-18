@@ -10,20 +10,22 @@
     </data>
     <android.widget.ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_height="match_parent"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        android:background="@color/lightBackground">
+
         <android.support.constraint.ConstraintLayout
-            android:layout_width ="match_parent"
-            android:layout_height="wrap_content"
-            android:background   ="@color/lightBackground">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/lightBackground">
 
             <TextView
                 android:id="@+id/otText"
                 style="@style/HeaderText"
-                android:onClick="@{() -> ctrl.goToOldTestamentProgress()}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:onClick="@{() -> ctrl.goToOldTestamentProgress()}"
                 android:text="@string/old_testament"
                 app:layout_constraintEnd_toStartOf="@+id/otProgress"
                 app:layout_constraintStart_toStartOf="parent"
@@ -32,11 +34,11 @@
             <TextView
                 android:id="@+id/otProgress"
                 style="@style/HeaderText"
-                android:text="@{ctrl.bible.oldTestamentProgress}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
+                android:text="@{ctrl.bible.oldTestamentProgress}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/otText"
                 app:layout_constraintTop_toTopOf="parent"
@@ -55,11 +57,17 @@
                 app:layout_constraintTop_toBottomOf="@+id/otText">
 
                 <TableRow>
+
                     <include layout="@layout/books_book" />
+
                     <include layout="@layout/books_book" />
+
                     <include layout="@layout/books_book" />
+
                     <include layout="@layout/books_book" />
+
                     <include layout="@layout/books_book" />
+
                     <include layout="@layout/books_book" />
                 </TableRow>
             </TableLayout>
@@ -67,11 +75,11 @@
             <TextView
                 android:id="@+id/ntText"
                 style="@style/HeaderText"
-                android:onClick="@{()->ctrl.goToNewTestamentProgress()}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:onClick="@{()->ctrl.goToNewTestamentProgress()}"
                 android:text="@string/new_testament"
                 app:layout_constraintEnd_toStartOf="@+id/ntProgress"
                 app:layout_constraintStart_toStartOf="parent"
@@ -80,11 +88,11 @@
             <TextView
                 android:id="@+id/ntProgress"
                 style="@style/HeaderText"
-                android:text="@{ctrl.bible.newTestamentProgress}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
+                android:text="@{ctrl.bible.newTestamentProgress}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ntText"
                 app:layout_constraintTop_toBottomOf="@+id/ot_table"
@@ -92,24 +100,32 @@
 
             <TableLayout
                 android:id="@+id/nt_table"
-                android:stretchColumns="*"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:horizontalSpacing="8dp"
+                android:stretchColumns="*"
                 android:verticalSpacing="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ntText">
 
                 <TableRow>
+
                     <include layout="@layout/books_book" />
+
                     <include layout="@layout/books_book" />
+
                     <include layout="@layout/books_book" />
+
                     <include layout="@layout/books_book" />
+
                     <include layout="@layout/books_book" />
+
                     <include layout="@layout/books_book" />
                 </TableRow>
             </TableLayout>

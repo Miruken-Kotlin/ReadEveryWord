@@ -7,7 +7,7 @@ import research.app1.BR
 import research.app1.features.ReadState
 import research.app1.features.calculateProgress
 
-class Book(val longName: String, val shortName: String, val chapterCount: Int) : BaseObservable()
+class Book(val id: Int, val longName: String, val shortName: String, val chapterCount: Int) : BaseObservable()
 {
     val chapters: List<Chapter> = (1..chapterCount).map { Chapter(it) }
 

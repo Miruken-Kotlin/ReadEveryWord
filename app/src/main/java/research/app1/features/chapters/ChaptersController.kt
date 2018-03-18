@@ -1,6 +1,5 @@
 package research.app1.features.chapters
 
-import android.databinding.DataBindingUtil
 import android.widget.TableLayout
 import android.widget.TableRow
 import research.app1.R
@@ -27,7 +26,7 @@ class  ChaptersController : Controller()
                 val row = TableRow(activity)
                 table.addView(row)
                 items.drop(i * columnCount).take(columnCount).forEach{
-                    ChapterController(it).addToView(row)
+                    ChapterController(book, it).addToView(row)
                 }
             }
         }

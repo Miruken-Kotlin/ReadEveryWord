@@ -2,6 +2,7 @@ package research.app1.features.books
 
 import android.widget.*
 import research.app1.R
+import research.app1.data.queries.getAllReadingRecords
 import research.app1.databinding.BooksBinding
 import research.app1.domain.Bible
 import research.app1.domain.Book
@@ -10,29 +11,10 @@ import research.app1.infrastructure.Controller
 class BooksController : Controller() {
 
     val bible: Bible = Bible()
+
     init {
-        fun readAll(book: Book){
-            book.chapters.forEach {
-                it.toggle()
-            }
-        }
-        fun readSome(book: Book){
-            book.chapters.take(3).forEach {
-                it.toggle()
-            }
-        }
-
-        bible.oldTestament.also {
-            readAll(it[0])
-            readSome(it[1])
-        }
-
-        bible.newTestament.also{
-            readSome(it[0])
-            readSome(it[1])
-            readSome(it[2])
-            readAll(it[3])
-            readAll(it.last())
+        getAllReadingRecords().forEach{
+            bible.books[it.bookId].chapters[it.chapterId].read = true
         }
     }
 
