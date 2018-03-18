@@ -9,7 +9,7 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "research.app1"
+        applicationId "com.readeveryword"
         minSdkVersion 23
         targetSdkVersion 26
         versionCode 1

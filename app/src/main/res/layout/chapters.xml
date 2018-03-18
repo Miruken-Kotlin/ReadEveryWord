@@ -6,7 +6,7 @@
     <data>
         <variable
             name="ctrl"
-            type="research.app1.features.chapters.ChaptersController" />
+            type="com.readEveryWord.features.chapters.ChaptersController" />
     </data>
 
     <android.widget.ScrollView

@@ -7,7 +7,7 @@
     <data>
         <variable
             name="ctrl"
-            type="research.app1.features.books.OldTestamentProgressController"/>
+            type="com.readEveryWord.features.books.OldTestamentProgressController"/>
     </data>
     <android.widget.ScrollView
         android:layout_height="match_parent"

@@ -5,7 +5,7 @@
     <data>
         <variable
             name="ctrl"
-            type="research.app1.features.chapters.ChapterController"/>
+            type="com.readEveryWord.features.chapters.ChapterController"/>
     </data>
     <TextView
         android:layout_width ="match_parent"
