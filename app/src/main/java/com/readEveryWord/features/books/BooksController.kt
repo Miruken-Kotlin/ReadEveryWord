@@ -20,7 +20,7 @@ class BooksController : Controller() {
 
     fun showBooks(){
         val view = inflate(R.layout.books)
-        bind<BooksBinding>(view).ctrl = this
+        bind<BooksBinding>(view)?.ctrl = this
 
         fun fillTable(table: TableLayout, items: List<Book>){
             table.removeAllViews()

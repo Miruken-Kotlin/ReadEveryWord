@@ -15,7 +15,7 @@ class OldTestamentProgressController : Controller() {
         bible    = data
         progress = OldTestamentProgress(bible)
         push<OldTestamentProgressBinding>(R.layout.old_testament_progress).also {
-            it.ctrl = this
+            it?.ctrl = this
         }
     }
 }

@@ -16,7 +16,7 @@ class  ChaptersController : Controller()
         book = selectedBook
 
         val view = inflate(R.layout.chapters)
-        bind<ChaptersBinding>(view).ctrl = this
+        bind<ChaptersBinding>(view)?.ctrl = this
 
         fun fillTable(table: TableLayout, items: List<Chapter>){
             table.removeAllViews()

@@ -26,7 +26,7 @@ open class Controller {
         return layoutInflater.inflate(view, parent, attach)
     }
 
-    fun <T : ViewDataBinding?>bind(view: View) : T {
+    fun <T : ViewDataBinding?>bind(view: View) : T? {
         return DataBindingUtil.bind<T>(view)
     }
 
@@ -47,7 +47,7 @@ open class Controller {
         return view
     }
 
-    fun <T : ViewDataBinding?>push(view: Int) : T {
+    fun <T : ViewDataBinding?>push(view: Int) : T? {
         return bind<T>(push(view))
     }
 
