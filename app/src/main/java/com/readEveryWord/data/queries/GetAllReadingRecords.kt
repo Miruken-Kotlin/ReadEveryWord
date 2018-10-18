@@ -11,7 +11,6 @@ import com.readEveryWord.data.ReadingRecordTable.Companion.Name
 import com.readEveryWord.data.ReadingRecordTable.Companion.RemoteId
 import com.readEveryWord.data.ReadingRecordTable.Companion.TimesRead
 import com.readEveryWord.data.ReadingRecordTable.Companion.UserId
-import com.readEveryWord.infrastructure.Controller
 
 fun getAllReadingRecords() : List<ReadingRecordData>{
 

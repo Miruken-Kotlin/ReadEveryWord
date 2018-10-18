@@ -7,7 +7,6 @@ import com.readEveryWord.data.queries.createReadingRecord
 import com.readEveryWord.databinding.ChaptersChapterBinding
 import com.readEveryWord.domain.Book
 import com.readEveryWord.domain.Chapter
-import com.readEveryWord.infrastructure.Controller
 import java.util.*
 
 class ChapterController(val book: Book, val chapter: Chapter) : Controller() {

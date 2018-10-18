@@ -6,7 +6,6 @@ import com.readEveryWord.R
 import com.readEveryWord.databinding.ChaptersBinding
 import com.readEveryWord.domain.Book
 import com.readEveryWord.domain.Chapter
-import com.readEveryWord.infrastructure.Controller
 
 class  ChaptersController : Controller()
 {

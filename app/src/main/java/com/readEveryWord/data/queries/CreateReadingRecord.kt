@@ -5,7 +5,6 @@ import android.database.sqlite.SQLiteDatabase
 import com.readEveryWord.data.DataContext
 import com.readEveryWord.data.ReadingRecordData
 import com.readEveryWord.data.ReadingRecordTable
-import com.readEveryWord.infrastructure.Controller
 
 fun createReadingRecord(data: ReadingRecordData){
     var db: SQLiteDatabase? = null

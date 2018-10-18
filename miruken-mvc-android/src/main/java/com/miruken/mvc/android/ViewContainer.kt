@@ -27,6 +27,10 @@ abstract class ViewContainer(
 
     override val policy by lazy { ViewPolicy(this) }
 
+    override fun display(
+            region: ViewingRegion
+    ) = region.show(this)
+
     override fun view(
             viewKey: Any,
             init: (Viewing.() -> Unit)?

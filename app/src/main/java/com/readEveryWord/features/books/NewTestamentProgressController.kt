@@ -4,7 +4,6 @@ import com.readEveryWord.R
 import com.readEveryWord.databinding.NewTestamentProgressBinding
 import com.readEveryWord.domain.Bible
 import com.readEveryWord.domain.NewTestamentProgress
-import com.readEveryWord.infrastructure.Controller
 
 class NewTestamentProgressController : Controller() {
 
