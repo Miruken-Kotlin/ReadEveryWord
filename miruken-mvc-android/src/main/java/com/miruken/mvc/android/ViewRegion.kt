@@ -1,7 +1,11 @@
 package com.miruken.mvc.android
 
 import android.content.Context
+import android.databinding.DataBindingUtil
+import android.databinding.ViewDataBinding
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.RelativeLayout
 import com.miruken.callback.Handling
 import com.miruken.concurrent.Promise
 import com.miruken.event.Event
@@ -82,8 +86,40 @@ class ViewRegion(
             removeFromView: Boolean,
             composer:       Handling
     ): Promise {
+        val androidView = when (view){
+            is View -> view
+            is ViewLayout -> {
+                view.bindingId?.let {
+                    check(view.viewModel != null) {
+                        "View $view is missing a viewModel"
+                    }
+                    val inflater = context.getSystemService(
+                            Context.LAYOUT_INFLATER_SERVICE)
+                            as LayoutInflater
+                    val dbView = DataBindingUtil.inflate<ViewDataBinding>(
+                            inflater, view.layoutId, this, true)
+                    dbView.setVariable(view.bindingId, view.viewModel)
+                    dbView
+                } else {
+                    View.inflate(context, view.layoutId, this)
+                }
+            }
+            else -> error("Unrecognized view $view")
+        }
+
+        constrain(androidView)
+        addView(androidView)
 
     }
+
+    private fun constrain(view: View) : View {
+        view.layoutParams = RelativeLayout.LayoutParams(
+            RelativeLayout.LayoutParams.MATCH_PARENT,
+            RelativeLayout.LayoutParams.MATCH_PARENT)
+
+        return view
+    }
+
 
     private fun removeView(
             fromView: Viewing,
