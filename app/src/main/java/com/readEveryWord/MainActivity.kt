@@ -16,10 +16,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val mainRegion = ViewRegion(this)
-        val navigator  = Navigator(mainRegion)
-        _appContext.addHandlers(navigator, TypeHandlers)
+
+        _appContext.addHandlers(
+                Navigator(mainRegion),
+                TypeHandlers)
 
         setContentView(mainRegion)
+        
         _appContext.next<BooksController> { showBooks() }
     }
 
