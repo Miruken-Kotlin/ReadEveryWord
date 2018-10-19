@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         val mainRegion = ViewRegion(this)
 
+        findViewById<>()
         appContext = Context()
         appContext.addHandlers(
                 Provider(this),

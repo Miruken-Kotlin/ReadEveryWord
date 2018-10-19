@@ -3,6 +3,7 @@ package com.miruken.mvc.android
 import android.content.Context
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
+import android.support.annotation.IdRes
 import android.view.LayoutInflater
 import android.view.View
 import com.miruken.mvc.view.ViewPolicy
@@ -10,7 +11,7 @@ import com.miruken.mvc.view.Viewing
 import com.miruken.mvc.view.ViewingRegion
 
 class ViewLayout(
-        private val layoutId:  Int,
+        @IdRes private val layoutId: Int,
         private val bindingId: Int? = null,
         private val initView:  (View.() -> Unit)? = null
 ) : Viewing {
