@@ -1,5 +1,6 @@
 package com.readEveryWord.data.queries
 
+import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import com.readEveryWord.data.DataContext
@@ -12,7 +13,7 @@ import com.readEveryWord.data.ReadingRecordTable.Companion.RemoteId
 import com.readEveryWord.data.ReadingRecordTable.Companion.TimesRead
 import com.readEveryWord.data.ReadingRecordTable.Companion.UserId
 
-fun getAllReadingRecords() : List<ReadingRecordData>{
+fun getAllReadingRecords(context: Context) : List<ReadingRecordData>{
 
     val sql = """
             SELECT
@@ -29,7 +30,7 @@ fun getAllReadingRecords() : List<ReadingRecordData>{
     var cursor: Cursor? = null
     val records = mutableListOf<ReadingRecordData>()
     try {
-        db = DataContext(Controller.activity).readableDatabase
+        db = DataContext(context).readableDatabase
 
         cursor = db?.rawQuery(sql, null)
         if(cursor?.count!! > 0){

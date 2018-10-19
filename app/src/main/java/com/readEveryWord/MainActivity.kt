@@ -22,6 +22,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
+        Hack.context = this
+
         HandlerDescriptor.getDescriptor<BookController>()
         HandlerDescriptor.getDescriptor<BooksController>()
         HandlerDescriptor.getDescriptor<NewTestamentProgressController>()
@@ -43,5 +46,11 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         appContext.end()
         super.onDestroy()
+    }
+}
+
+class Hack {
+    companion object {
+        lateinit var context: android.content.Context
     }
 }

@@ -4,6 +4,7 @@ import android.widget.TableLayout
 import android.widget.TableRow
 import com.android.databinding.library.baseAdapters.BR
 import com.miruken.mvc.android.AndroidController
+import com.readEveryWord.Hack
 import com.readEveryWord.R
 import com.readEveryWord.data.queries.getAllReadingRecords
 import com.readEveryWord.domain.Bible
@@ -13,7 +14,7 @@ class BooksController : AndroidController() {
     val bible = Bible()
 
     init {
-        getAllReadingRecords().forEach{
+        getAllReadingRecords(Hack.context).forEach{
             bible.books[it.bookId].chapters[it.chapterId].read = true
         }
     }

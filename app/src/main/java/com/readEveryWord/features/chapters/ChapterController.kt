@@ -2,6 +2,7 @@ package com.readEveryWord.features.chapters
 
 import android.view.ViewGroup
 import com.miruken.mvc.android.AndroidController
+import com.readEveryWord.Hack
 import com.readEveryWord.R
 import com.readEveryWord.data.ReadingRecordData
 import com.readEveryWord.data.queries.createReadingRecord
@@ -21,7 +22,7 @@ class ChapterController(val book: Book, val chapter: Chapter) : AndroidControlle
                 Date().time,
                 0,
                 null,
-                null))
+                null), Hack.context)
         chapter.read = true
     }
 }
