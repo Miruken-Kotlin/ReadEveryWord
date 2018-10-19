@@ -17,7 +17,7 @@ import com.readEveryWord.features.chapters.ChapterController
 import com.readEveryWord.features.chapters.ChaptersController
 
 class MainActivity : AppCompatActivity() {
-    lateinit var appContext: Context
+    private val appContext = Context()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,16 +30,14 @@ class MainActivity : AppCompatActivity() {
         HandlerDescriptor.getDescriptor<ChapterController>()
 
         val mainRegion = ViewRegion(this)
-        
-        appContext = Context()
+
         appContext.addHandlers(
                 Provider(this),
                 Navigator(mainRegion),
                 TypeHandlers)
 
-        setContentView(mainRegion)
-
         appContext.next<BooksController> { showBooks() }
+        setContentView(mainRegion)
     }
 
     override fun onDestroy() {
