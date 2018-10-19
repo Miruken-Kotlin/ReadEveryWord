@@ -30,8 +30,7 @@ class MainActivity : AppCompatActivity() {
         HandlerDescriptor.getDescriptor<ChapterController>()
 
         val mainRegion = ViewRegion(this)
-
-        findViewById<>()
+        
         appContext = Context()
         appContext.addHandlers(
                 Provider(this),
