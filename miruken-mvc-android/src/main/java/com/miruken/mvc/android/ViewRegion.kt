@@ -19,6 +19,8 @@ class ViewRegion(
     private val _layers    = mutableListOf<ViewLayer>()
     private var _unwinding = false
 
+    private val activeView = activeLayer?.view
+
     override fun show(
             view:     Viewing,
             composer: Handling
@@ -61,16 +63,16 @@ class ViewRegion(
         }
 
         if (push) {
-            val pop = if (overlay) {
+            layer = if (overlay) {
                 pushOverlay()
             } else {
-                pushOverlay()
+                pushLayer()
             }
             composer.resolve<com.miruken.context.Context>()?.also {
                 it.contextEnding += { _ ->
                     // allows ending animation
                     if (_layers.isNotEmpty()) {
-                        pop()
+                        layer!!.close()
                     }
                 }
             }
@@ -86,13 +88,9 @@ class ViewRegion(
     private val activeLayer get() =
         if (_layers.isNotEmpty()) _layers.last() else null
 
-    override fun pushLayer() = createLayer(false).let {
-        { it.close() }
-    }
+    override fun pushLayer() = createLayer(false)
 
-    private fun pushOverlay() = createLayer(true).let {
-        { it.close() }
-    }
+    private fun pushOverlay() = createLayer(true)
 
     override fun unwindLayers() {
         _unwinding = true
@@ -102,30 +100,23 @@ class ViewRegion(
         _unwinding = false
     }
 
-    private fun createLayer(overlay: Boolean): ViewLayer {
-        val layer = ViewLayer(overlay)
-        _layers.add(layer)
-        return layer
-    }
+    private fun createLayer(overlay: Boolean) =
+            ViewLayer(overlay).apply { _layers.add(this) }
 
-    private fun removeLayer(layer: ViewLayer) {
-        _layers.remove(layer)
-        layer.transitionFrom()
-    }
+    private fun removeLayer(layer: ViewLayer) =
+            layer.takeIf { _layers.remove(it) }
+                    ?.transitionFrom()
 
-    private fun dropLayer(layer: ViewLayer): ViewLayer? {
-        val index = _layers.indexOf(layer)
-        if (index <= 0) return null
-        _layers.removeAt(index)
-        return _layers[index - 1]
-    }
+    private fun dropLayer(layer: ViewLayer) =
+            _layers.indexOf(layer).takeIf { it > 0 }?.let {
+                _layers.removeAt(it)
+                _layers[it - 1]
+            }
 
-    private fun getLayerBelow(layer: ViewLayer): ViewLayer? {
-        val index = getLayerIndex(layer)
-        return if (index > 0) {
-            _layers[index - 1]
-        } else null
-    }
+    private fun getLayerBelow(layer: ViewLayer) =
+        getLayerIndex(layer).takeIf { it > 0 }?.let {
+            _layers[it - 1]
+        }
 
     private fun getLayerIndex(layer: ViewLayer) =
             _layers.indexOf(layer)
@@ -160,7 +151,7 @@ class ViewRegion(
     private fun removeView(
             fromView: View,
             toView:   View?,
-            composer: Handling
+            composer: Handling?
     ): Promise<*> {
         removeView(fromView)
         return Promise.EMPTY
@@ -172,7 +163,7 @@ class ViewRegion(
                 RelativeLayout.LayoutParams.MATCH_PARENT)
     }
 
-    private inner class ViewLayer(
+    inner class ViewLayer(
             private val overlay: Boolean
     ) : ViewingLayer {
         private var _composer: Handling? = null
@@ -238,7 +229,13 @@ class ViewRegion(
         }
 
         fun transitionFrom() {
-
+            val activeView = activeView
+            view?.takeUnless {
+                it.second === activeView?.second
+            }?.also {
+                removeView(it.second, activeView?.second, _composer)
+            }
+            view = null
         }
 
         override fun duration(
