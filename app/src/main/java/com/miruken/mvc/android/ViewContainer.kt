@@ -15,7 +15,6 @@ import com.miruken.mvc.view.ViewPolicy
 import com.miruken.mvc.view.ViewingRegion
 import kotlin.reflect.KClass
 import kotlin.reflect.KType
-import kotlin.reflect.full.createInstance
 import kotlin.reflect.full.isSubclassOf
 import kotlin.reflect.jvm.jvmErasure
 
@@ -33,25 +32,15 @@ abstract class ViewContainer(
 
     override fun view(
             viewKey: Any,
-            init: (Viewing.() -> Unit)?
+            init:    (Viewing.() -> Unit)?
     ): Viewing {
         val composer = requireComposer()
 
         val view = when (viewKey) {
-            is KType -> {
-                val clazz = viewKey.jvmErasure
-                if (clazz.java.isInterface) {
-                    if (!this::class.isSubclassOf(clazz)) {
-                        notHandled()
-                    }
-                    this::class.createInstance()
-                } else {
-                    viewKey.jvmErasure.createInstance()
-                }
-            }
-            is KClass<*> -> viewKey.createInstance()
-            else -> notHandled()
-        } as Viewing
+            is KType -> createView(viewKey.jvmErasure)
+            is KClass<*> -> createView(viewKey)
+            else -> null
+        } ?: notHandled()
 
         init?.invoke(view)
 
@@ -67,11 +56,33 @@ abstract class ViewContainer(
         return view
     }
 
-    override fun show(view: Viewing) =
-            show(view, requireComposer())
+    override fun show(view: Viewing) = runOnMainThread {
+        show(view, requireComposer())
+    }
 
     abstract fun show(
             view:     Viewing,
             composer: Handling
     ): ViewingLayer
+
+    private fun createView(viewClass: KClass<*>): Viewing? {
+        if (!viewClass.isSubclassOf(Viewing::class)) {
+            return null
+        }
+        val implClass = when {
+            viewClass.java.isInterface ||
+            viewClass.isAbstract -> this::class.takeIf {
+                it.isSubclassOf(viewClass)
+            } ?: return null
+            else -> viewClass
+        }
+        return implClass.constructors.firstOrNull {
+            it.parameters.size == 1 &&
+            it.parameters[0].type.classifier == Context::class
+        }?.let {
+            runOnMainThread {
+                it.call(context) as Viewing
+            }
+        }
+    }
 }

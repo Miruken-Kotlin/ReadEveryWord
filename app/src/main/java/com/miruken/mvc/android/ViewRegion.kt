@@ -127,9 +127,9 @@ class ViewRegion(
             options:        RegionOptions?,
             removeFromView: Boolean,
             composer:       Handling
-    ): Promise<*> {
+    ) = runOnMainThread {
         if (_unwinding && indexOfChild(view) >= 0) {
-            return Promise.EMPTY
+            return@runOnMainThread Promise.EMPTY
         }
 
         constrain(view)
@@ -145,16 +145,16 @@ class ViewRegion(
             removeView(fromView, null, composer)
         }
 
-        return Promise.EMPTY
+        Promise.EMPTY
     }
 
     private fun removeView(
             fromView: View,
             toView:   View?,
             composer: Handling?
-    ): Promise<*> {
+    ) = runOnMainThread {
         removeView(fromView)
-        return Promise.EMPTY
+        Promise.EMPTY
     }
 
     private fun constrain(view: View) = view.apply {
@@ -228,7 +228,7 @@ class ViewRegion(
             return this
         }
 
-        fun transitionFrom() {
+        fun transitionFrom() = runOnMainThread {
             val activeView = activeView
             view?.takeUnless {
                 it.second === activeView?.second
