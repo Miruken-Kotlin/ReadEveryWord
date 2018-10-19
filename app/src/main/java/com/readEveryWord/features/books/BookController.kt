@@ -1,7 +1,6 @@
 package com.readEveryWord.features.books
 
 import android.view.ViewGroup
-import com.miruken.mvc.Controller
 import com.miruken.mvc.android.AndroidController
 import com.readEveryWord.R
 import com.readEveryWord.databinding.BooksBookBinding

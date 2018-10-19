@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity
 import com.miruken.callback.Provider
 import com.miruken.callback.TypeHandlers
 import com.miruken.callback.policy.HandlerDescriptor
-import com.miruken.callback.provide
 import com.miruken.context.Context
 import com.miruken.mvc.Navigator
 import com.miruken.mvc.android.ViewRegion
@@ -14,6 +13,7 @@ import com.readEveryWord.features.books.BookController
 import com.readEveryWord.features.books.BooksController
 import com.readEveryWord.features.books.NewTestamentProgressController
 import com.readEveryWord.features.books.OldTestamentProgressController
+import com.readEveryWord.features.chapters.ChapterController
 import com.readEveryWord.features.chapters.ChaptersController
 
 class MainActivity : AppCompatActivity() {

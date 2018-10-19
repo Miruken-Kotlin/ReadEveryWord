@@ -1,11 +1,12 @@
 package com.readEveryWord.features.books
 
+import com.android.databinding.library.baseAdapters.BR
+import com.miruken.mvc.android.AndroidController
 import com.readEveryWord.R
-import com.readEveryWord.databinding.NewTestamentProgressBinding
 import com.readEveryWord.domain.Bible
 import com.readEveryWord.domain.NewTestamentProgress
 
-class NewTestamentProgressController : Controller() {
+class NewTestamentProgressController : AndroidController() {
 
     lateinit var bible: Bible
     lateinit var progress: NewTestamentProgress
@@ -13,9 +14,11 @@ class NewTestamentProgressController : Controller() {
     fun showProgress(data: Bible){
         bible    = data
         progress = NewTestamentProgress(bible)
-        push<NewTestamentProgressBinding>(R.layout.new_testament_progress).also {
-            it?.ctrl = this
-        }
+        show(R.layout.new_testament_progress, BR.ctrl)
+    }
+
+    fun pop (){
+
     }
 }
 
