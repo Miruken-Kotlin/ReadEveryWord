@@ -1,6 +1,10 @@
 package com.miruken.mvc.android
 
 import android.content.Context
+import android.databinding.DataBindingUtil
+import android.databinding.ViewDataBinding
+import android.view.LayoutInflater
+import android.view.View
 import android.widget.RelativeLayout
 import com.miruken.callback.Handling
 import com.miruken.callback.notHandled
@@ -65,18 +69,38 @@ abstract class ViewContainer(
             composer: Handling
     ): ViewingLayer
 
+    protected fun inflateView(layout: ViewLayout): View {
+        val layoutId = layout.layoutId
+        val view = layout.bindingId?.let {
+            val viewModel = layout.viewModel
+            check(viewModel != null) {
+                "Bindable layout require a view model"
+            }
+            val inflater = LayoutInflater.from(context)
+            val binding  = DataBindingUtil.inflate<ViewDataBinding>(
+                    inflater, layoutId, this, true)
+            check(binding?.setVariable(
+                    layout.bindingId, viewModel) == true) {
+                "Unable to bind layout with id $layoutId"
+            }
+            binding.root
+        } ?: View.inflate(context, layoutId, null)
+        layout.initView?.invoke(view)
+        return view
+    }
+
     private fun createView(viewClass: KClass<*>): Viewing? {
         if (!viewClass.isSubclassOf(Viewing::class)) {
             return null
         }
-        val implClass = when {
+        val viewImplClass = when {
             viewClass.java.isInterface ||
             viewClass.isAbstract -> this::class.takeIf {
                 it.isSubclassOf(viewClass)
             } ?: return null
             else -> viewClass
         }
-        return implClass.constructors.firstOrNull {
+        return viewImplClass.constructors.firstOrNull {
             it.parameters.size == 1 &&
             it.parameters[0].type.classifier == Context::class
         }?.let {

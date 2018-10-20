@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import com.miruken.callback.Provider
 import com.miruken.callback.TypeHandlers
 import com.miruken.callback.policy.HandlerDescriptor
+import com.miruken.callback.resolve
 import com.miruken.context.Context
 import com.miruken.mvc.Navigator
 import com.miruken.mvc.android.ViewRegion
@@ -21,9 +22,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
-        Hack.context = this
 
         HandlerDescriptor.getDescriptor<BookController>()
         HandlerDescriptor.getDescriptor<BooksController>()
@@ -46,11 +44,5 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         appContext.end()
         super.onDestroy()
-    }
-}
-
-class Hack {
-    companion object {
-        lateinit var context: android.content.Context
     }
 }

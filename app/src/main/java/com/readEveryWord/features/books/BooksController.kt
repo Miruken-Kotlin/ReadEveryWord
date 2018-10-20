@@ -1,12 +1,12 @@
 package com.readEveryWord.features.books
 
+import android.content.Context
 import android.widget.TableLayout
 import android.widget.TableRow
 import com.android.databinding.library.baseAdapters.BR
 import com.miruken.callback.Provides
 import com.miruken.context.Scoped
 import com.miruken.mvc.android.AndroidController
-import com.readEveryWord.Hack
 import com.readEveryWord.R
 import com.readEveryWord.data.queries.getAllReadingRecords
 import com.readEveryWord.domain.Bible
@@ -14,12 +14,12 @@ import com.readEveryWord.domain.Book
 
 class BooksController
     @Provides @Scoped
-    constructor(): AndroidController() {
+    constructor(context: Context) : AndroidController() {
 
     val bible = Bible()
 
     init {
-        getAllReadingRecords(Hack.context).forEach{
+        getAllReadingRecords(context).forEach{
             bible.books[it.bookId].chapters[it.chapterId].read = true
         }
     }

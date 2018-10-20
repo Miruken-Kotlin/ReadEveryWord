@@ -27,7 +27,7 @@ class ViewRegion(
     ): ViewingLayer {
         val newView = when (view) {
             is View -> view
-            is ViewLayout -> view.inflate(context)
+            is ViewLayout -> inflateView(view)
             else -> notHandled()
         }
         return transitionTo(newView, view, composer)
@@ -127,9 +127,9 @@ class ViewRegion(
             options:        RegionOptions?,
             removeFromView: Boolean,
             composer:       Handling
-    ) = runOnMainThread {
+    ): Promise<*> {
         if (_unwinding && indexOfChild(view) >= 0) {
-            return@runOnMainThread Promise.EMPTY
+            return Promise.EMPTY
         }
 
         constrain(view)
@@ -145,16 +145,16 @@ class ViewRegion(
             removeView(fromView, null, composer)
         }
 
-        Promise.EMPTY
+        return Promise.EMPTY
     }
 
     private fun removeView(
             fromView: View,
             toView:   View?,
             composer: Handling?
-    ) = runOnMainThread {
+    ): Promise<*> {
         removeView(fromView)
-        Promise.EMPTY
+        return Promise.EMPTY
     }
 
     private fun constrain(view: View) = view.apply {
