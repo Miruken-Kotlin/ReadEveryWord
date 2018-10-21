@@ -10,58 +10,36 @@ import com.miruken.callback.Handling
 import com.miruken.callback.notHandled
 import com.miruken.callback.requireComposer
 import com.miruken.callback.resolve
-import com.miruken.mvc.Controller
+import com.miruken.context.dispose
 import com.miruken.mvc.Navigation
-import com.miruken.mvc.dependsOn
 import com.miruken.mvc.view.Viewing
 import com.miruken.mvc.view.ViewingLayer
-import com.miruken.mvc.view.ViewPolicy
 import com.miruken.mvc.view.ViewingRegion
 import kotlin.reflect.KClass
 import kotlin.reflect.KType
 import kotlin.reflect.full.isSubclassOf
 import kotlin.reflect.jvm.jvmErasure
 
-abstract class ViewContainer(
-        context: Context
-) : RelativeLayout(context), ViewingRegion, Viewing {
-
+abstract class ViewContainer(context: Context) :
+        RelativeLayout(context), ViewingRegion, Viewing {
     override var viewModel: Any? = null
 
-    override val policy by lazy { ViewPolicy(this) }
-
-    override fun display(
-            region: ViewingRegion
-    ) = region.show(this)
+    override fun display(region: ViewingRegion) =
+            region.show(this)
 
     override fun view(
             viewKey: Any,
             init:    (Viewing.() -> Unit)?
-    ): Viewing {
-        val composer = requireComposer()
-
-        val view = when (viewKey) {
+    )= (when (viewKey) {
             is KType -> createView(viewKey.jvmErasure)
             is KClass<*> -> createView(viewKey)
             else -> null
-        } ?: notHandled()
+        } ?: notHandled()).also { init?.invoke(it) }
 
-        init?.invoke(view)
-
-        if (view.viewModel == null) {
-            val navigation = composer.resolve<Navigation<*>>()
-            view.viewModel = navigation?.controller
-        }
-
-        val controller = view.viewModel as? Controller
-        controller?.dependsOn(view)
-
-        view.policy.track()
-        return view
-    }
-
-    override fun show(view: Viewing) = runOnMainThread {
-        show(view, requireComposer())
+    override fun show(view: Viewing): ViewingLayer {
+        val composer = requireComposer()
+        bindView(view)
+        return runOnMainThread { show(view, composer) }
     }
 
     abstract fun show(
@@ -74,7 +52,7 @@ abstract class ViewContainer(
         val view = layout.bindingId?.let {
             val viewModel = layout.viewModel
             check(viewModel != null) {
-                "Bindable layout require a view model"
+                "Bindable layout requires a view model"
             }
             val inflater = LayoutInflater.from(context)
             val binding  = DataBindingUtil.inflate<ViewDataBinding>(
@@ -106,6 +84,17 @@ abstract class ViewContainer(
         }?.let {
             runOnMainThread {
                 it.call(context) as Viewing
+            }
+        }
+    }
+
+    private fun bindView(view: Viewing) {
+        if (view.viewModel != null) return
+        val navigation = requireComposer().resolve<Navigation<*>>()
+        navigation?.controller?.also { controller ->
+            view.viewModel = controller
+            (view as? AutoCloseable)?.also {
+                controller.context?.dispose(it)
             }
         }
     }

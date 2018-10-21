@@ -13,9 +13,8 @@ import com.miruken.mvc.option.RegionOptions
 import com.miruken.mvc.view.*
 import java.time.Duration
 
-class ViewRegion(
-        context: Context
-) : ViewContainer(context), ViewingStackView {
+class ViewRegion(context: Context) :
+        ViewContainer(context), ViewingStackView {
     private val _layers    = mutableListOf<ViewLayer>()
     private var _unwinding = false
 
@@ -167,22 +166,9 @@ class ViewRegion(
             private val overlay: Boolean
     ) : ViewingLayer {
         private var _composer: Handling? = null
-        private var _view: Pair<Viewing, View>? = null
         private var _closed = false
 
-        var view: Pair<Viewing, View>?
-            get() = _view
-            set(value) {
-                _view?.first?.takeIf {
-                    doesDependOn(it)
-                }?.release()
-                _view = value
-                view?.first?.takeIf {
-                    it.policy.parent == null
-                }?.also {
-                    dependsOn(it)
-                }
-            }
+        var view: Pair<Viewing, View>? = null
 
         override val index = getLayerIndex(this)
 
@@ -250,7 +236,8 @@ class ViewRegion(
             try {
                 removeLayer(this)
             } finally {
-                _closed = true
+                _closed   = true
+                _composer = null
                 closed(this)
             }
         }
