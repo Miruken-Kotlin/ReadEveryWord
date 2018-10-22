@@ -11,7 +11,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.readeveryword"
-        minSdkVersion 23
+        minSdkVersion 27
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -26,13 +26,14 @@ android {
     dataBinding {
         enabled = true
     }
-
     lintOptions {
         abortOnError false
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    productFlavors {
     }
 }
 
@@ -45,8 +46,8 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    api 'com.miruken:miruken:0.0.1-alpha.9'
-    api 'com.miruken:miruken-mvc:0.0.1-alpha.9'
+    api 'com.miruken:miruken:0.0.1-alpha.12'
+    api 'com.miruken:miruken-mvc:0.0.1-alpha.12'
     //    implementation project(path: ':miruken-mvc-android')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

@@ -23,12 +23,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        HandlerDescriptor.getDescriptor<BookController>()
-        HandlerDescriptor.getDescriptor<BooksController>()
-        HandlerDescriptor.getDescriptor<NewTestamentProgressController>()
-        HandlerDescriptor.getDescriptor<OldTestamentProgressController>()
-        HandlerDescriptor.getDescriptor<ChaptersController>()
-        HandlerDescriptor.getDescriptor<ChapterController>()
+        registerComponents()
 
         val mainRegion = ViewRegion(this)
 
@@ -45,4 +40,13 @@ class MainActivity : AppCompatActivity() {
         appContext.end()
         super.onDestroy()
     }
+}
+
+private fun registerComponents() {
+    HandlerDescriptor.getDescriptor<BookController>()
+    HandlerDescriptor.getDescriptor<BooksController>()
+    HandlerDescriptor.getDescriptor<NewTestamentProgressController>()
+    HandlerDescriptor.getDescriptor<OldTestamentProgressController>()
+    HandlerDescriptor.getDescriptor<ChaptersController>()
+    HandlerDescriptor.getDescriptor<ChapterController>()
 }
