@@ -227,9 +227,7 @@ class ViewRegion(context: Context) :
         override fun duration(
                 duration: Duration,
                 complete: (Boolean) -> Unit
-        ): () -> Unit {
-            return {}
-        }
+        ) = {}
 
         override fun close() {
             if (_closed) return
