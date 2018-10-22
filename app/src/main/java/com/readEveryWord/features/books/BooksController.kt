@@ -19,7 +19,7 @@ class BooksController
     val bible = Bible()
 
     init {
-        getAllReadingRecords(context).forEach{
+        getAllReadingRecords(context).forEach {
             bible.books[it.bookId].chapters[it.chapterId].read = true
         }
     }

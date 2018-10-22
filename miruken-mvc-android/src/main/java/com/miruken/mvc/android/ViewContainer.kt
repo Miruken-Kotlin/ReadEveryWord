@@ -56,7 +56,7 @@ abstract class ViewContainer(context: Context) :
             }
             val inflater = LayoutInflater.from(context)
             val binding  = DataBindingUtil.inflate<ViewDataBinding>(
-                    inflater, layoutId, this, true)
+                    inflater, layoutId, this, false)
             check(binding?.setVariable(
                     layout.bindingId, viewModel) == true) {
                 "Unable to bind layout with id $layoutId"
