@@ -14,7 +14,7 @@ import java.util.*
 
 class ChapterController
     @Provides @Scoped
-    constructor()  : AndroidController() {
+    constructor() : AndroidController() {
 
     private lateinit var book: Book
 
@@ -32,9 +32,8 @@ class ChapterController
                 book.id,
                 chapter.id,
                 Date().time,
-                0,
-                null,
-                null), context!!.resolve()!!)
+                0, null,null),
+                context!!.resolve()!!)
         chapter.read = true
     }
 }

@@ -7,7 +7,10 @@ import com.readEveryWord.data.DataContext
 import com.readEveryWord.data.ReadingRecordData
 import com.readEveryWord.data.ReadingRecordTable
 
-fun createReadingRecord(data: ReadingRecordData, context: Context){
+fun createReadingRecord(
+        data:    ReadingRecordData,
+        context: Context
+) {
     var db: SQLiteDatabase? = null
     try {
         db = DataContext(context).writableDatabase

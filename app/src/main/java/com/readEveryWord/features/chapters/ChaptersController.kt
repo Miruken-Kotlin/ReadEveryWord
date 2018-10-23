@@ -18,17 +18,13 @@ class ChaptersController
     fun showChapters(book: Book) {
         this.book = book
 
-        show(R.layout.chapters_chapter, BR.ctrl) {
+        show(R.layout.chapters, BR.ctrl) {
             table(this, R.id.chapter_table, 6).apply {
-                 book.chapters.forEach {
+                 book.chapters.forEach { chapter ->
                     add().push<ChapterController> {
-                        showChapter(book, it) }
+                        showChapter(book, chapter) }
                  }
             }
         }
-    }
-
-    fun pop() {
-        this.context?.end()
     }
 }
