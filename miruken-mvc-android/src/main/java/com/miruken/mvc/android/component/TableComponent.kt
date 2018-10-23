@@ -30,10 +30,14 @@ class TableComponent(
     fun add(): Context {
         _count++
         val cell = ViewRegion(table.context)
-        currentRow().addView(cell)
+        val row  = currentRow().apply { addView(cell) }
         return context.addRegion(cell).apply {
-            contextEnding += { _ -> removeCell(cell) }
-            childContextEnding += { _ -> removeCell(cell) }
+            contextEnding += { _ ->
+                removeCell(row, cell)
+            }
+            childContextEnding += { _ ->
+                removeCell(row, cell)
+            }
         }
     }
 
@@ -48,8 +52,11 @@ class TableComponent(
         return _rows.last()
     }
 
-    private fun removeCell(cell: ViewRegion) {
-        table.removeView(cell)
+    private fun removeCell(row: TableRow, cell: ViewRegion) {
+        row.removeView(cell)
+        if (row.childCount == 0) {
+            table.removeView(row)
+        }
     }
 }
 
