@@ -1,19 +1,27 @@
 package com.readEveryWord.features.books
 
-import android.view.ViewGroup
+import com.miruken.callback.Provides
+import com.miruken.context.Scoped
 import com.miruken.mvc.android.AndroidController
 import com.readEveryWord.R
-import com.readEveryWord.databinding.BooksBookBinding
-import com.readEveryWord.domain.Book
 import com.readEveryWord.features.chapters.ChaptersController
+import com.android.databinding.library.baseAdapters.BR
+import com.readEveryWord.domain.Book
 
-class BookController(val book: Book) : AndroidController() {
+class BookController
+    @Provides @Scoped
+    constructor() : AndroidController() {
 
-    fun addToView(parent: ViewGroup) {
-        bind<BooksBookBinding>(R.layout.books_book, parent).ctrl = this
+    var book: Book? = null
+
+    fun showBook(selectedBook: Book) {
+        book = selectedBook
+        show(R.layout.books_book, BR.ctrl)
     }
 
     fun goToChapters() {
-        ChaptersController().showChapters(book)
+        book?.apply {
+            ChaptersController().showChapters(this)
+        }
     }
 }

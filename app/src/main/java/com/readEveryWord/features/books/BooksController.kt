@@ -1,12 +1,19 @@
 package com.readEveryWord.features.books
 
 import android.content.Context
+import android.databinding.BindingAdapter
+import android.view.ViewGroup
 import android.widget.TableLayout
 import android.widget.TableRow
 import com.android.databinding.library.baseAdapters.BR
+import com.miruken.callback.Next
 import com.miruken.callback.Provides
+import com.miruken.callback.toHandler
+import com.miruken.context.Contextual
 import com.miruken.context.Scoped
 import com.miruken.mvc.android.AndroidController
+import com.miruken.mvc.android.ViewRegion
+import com.miruken.mvc.next
 import com.readEveryWord.R
 import com.readEveryWord.data.queries.getAllReadingRecords
 import com.readEveryWord.domain.Bible
@@ -29,10 +36,10 @@ class BooksController
             findViewById<TableLayout>(R.id.ot_table).also {
                 fillTable(it, bible.oldTestament)
             }
-
-            findViewById<TableLayout>(R.id.nt_table).also {
-                fillTable(it, bible.newTestament)
-            }
+//
+//            findViewById<TableLayout>(R.id.nt_table).also {
+//                fillTable(it, bible.newTestament)
+//            }
         }
     }
 
@@ -47,7 +54,9 @@ class BooksController
                     .take(columnCount)
                     .toList()
                     .forEach {
-                        BookController(it).addToView(row)
+                        val region = ViewRegion(row.context)
+                        row.addView(region)
+                        region.toHandler().next<BookController> { showBook(it) }
                     }
         }
     }
@@ -61,3 +70,16 @@ class BooksController
     }
 }
 
+@BindingAdapter("entries")
+fun <T> setEntries(viewGroup: ViewGroup,
+                   oldEntries: List<T>?,
+                   newEntries: List<T>?) {
+
+    newEntries?.forEach {
+        viewGroup.addView(ViewRegion(viewGroup.context))
+    }
+}
+
+class TableComponent(contextual: Contextual) {
+
+}
