@@ -4,7 +4,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import com.readEveryWord.domain.Book
-import com.readEveryWord.features.ReadState
+import com.readEveryWord.domain.ReadState
 
 class BookTests {
 

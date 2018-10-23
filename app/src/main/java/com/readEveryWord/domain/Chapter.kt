@@ -3,7 +3,6 @@ package com.readEveryWord.domain
 import android.databinding.BaseObservable
 import android.databinding.Bindable
 import com.readEveryWord.BR
-import com.readEveryWord.features.ReadState
 
 class Chapter(val number: Int) : BaseObservable() {
 

@@ -4,7 +4,6 @@ import android.databinding.BaseObservable
 import android.databinding.Bindable
 import android.databinding.Observable
 import com.readEveryWord.BR
-import com.readEveryWord.features.ReadState
 import com.readEveryWord.features.calculateProgress
 
 class Book(val id: Int, val longName: String, val shortName: String, val chapterCount: Int) : BaseObservable()

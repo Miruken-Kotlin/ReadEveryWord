@@ -5,10 +5,7 @@ import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.TextView
 import com.readEveryWord.R
-
-enum class ReadState {
-    NOT_STARTED, STARTED, COMPLETED
-}
+import com.readEveryWord.domain.ReadState
 
 @BindingAdapter("readState")
 fun readStateAdapter(view: View, state: ReadState?) {

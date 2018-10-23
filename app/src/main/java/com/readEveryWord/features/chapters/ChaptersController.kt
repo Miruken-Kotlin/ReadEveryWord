@@ -22,7 +22,8 @@ class ChaptersController
             table(this, R.id.chapter_table, 6).apply {
                  book.chapters.forEach { chapter ->
                     add().push<ChapterController> {
-                        showChapter(book, chapter) }
+                        showChapter(book, chapter)
+                    }
                  }
             }
         }

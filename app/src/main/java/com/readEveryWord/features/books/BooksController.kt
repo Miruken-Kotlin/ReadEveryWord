@@ -14,18 +14,15 @@ class BooksController
     @Provides @Scoped
     constructor(val bible: Bible) : AndroidController() {
 
-    private lateinit var _oldTestament: TableComponent
-    private lateinit var _newTestament: TableComponent
-
     fun showBooks() {
         show(R.layout.books, BR.ctrl) {
-            _oldTestament = table(this, R.id.ot_table, 6).apply {
+            table(this, R.id.ot_table, 6).apply {
                 bible.oldTestament.forEach { book ->
                     add().next<BookController> { show(book) }
                 }
             }
 
-            _newTestament = table(this, R.id.nt_table, 6).apply {
+            table(this, R.id.nt_table, 6).apply {
                 bible.newTestament.forEach { book ->
                     add().next<BookController> { show(book) }
                 }

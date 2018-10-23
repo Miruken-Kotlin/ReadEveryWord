@@ -1,7 +1,6 @@
 package com.readEveryWord.data.queries
 
 import android.content.ContentValues
-import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import com.readEveryWord.data.DataContext
 import com.readEveryWord.data.ReadingRecordData
@@ -9,11 +8,11 @@ import com.readEveryWord.data.ReadingRecordTable
 
 fun createReadingRecord(
         data:    ReadingRecordData,
-        context: Context
+        dataContext: DataContext
 ) {
     var db: SQLiteDatabase? = null
     try {
-        db = DataContext(context).writableDatabase
+        db = dataContext.writableDatabase
         db.insert(ReadingRecordTable.Name, null, ContentValues().apply {
             put(ReadingRecordTable.UserId,    data.userId)
             put(ReadingRecordTable.BookId,    data.bookId)
