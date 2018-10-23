@@ -20,6 +20,6 @@ class BookController
     }
 
     fun goToChapters() {
-        push<ChaptersController>{ showChapters(book) }
+        push<ChaptersController>{ showChapters(this.book) }
     }
 }
