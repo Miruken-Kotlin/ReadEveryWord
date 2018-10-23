@@ -85,35 +85,27 @@ class Bible : BaseObservable() {
     }
 
     init {
-        books.flatMap {
-            it.chapters
-        }.forEach{
+        books.flatMap { it.chapters }.forEach {
             it.addOnPropertyChangedCallback(chapterCallback)
         }
     }
 
     val oldTestament  = books.take(39)
     val law           = oldTestament.take(5)
-    val history       = oldTestament.drop(5).take(12)
-    val wisdom        = oldTestament.drop(17).take(5)
-    val majorProphets = oldTestament.drop(22).take(5)
+    val history       = oldTestament.asSequence().drop(5).take(12).toList()
+    val wisdom        = oldTestament.asSequence().drop(17).take(5).toList()
+    val majorProphets = oldTestament.asSequence().drop(22).take(5).toList()
     val minorProphets = oldTestament.takeLast(12)
 
     val newTestament = books.takeLast(27)
     val gospels      = newTestament.take(4)
-    val acts         = newTestament.drop(4).take(1)
-    val epistles     = newTestament.drop(5).take(21)
+    val acts         = newTestament.asSequence().drop(4).take(1).toList()
+    val epistles     = newTestament.asSequence().drop(5).take(21).toList()
     val revelation   = newTestament.last()
 
     @Bindable
-    var oldTestamentProgress: String = ""
-        get(){
-            return calculateProgress(oldTestament)
-        }
+    var oldTestamentProgress = calculateProgress(oldTestament)
 
     @Bindable
-    var newTestamentProgress: String = ""
-        get(){
-            return calculateProgress(newTestament)
-        }
+    var newTestamentProgress = calculateProgress(newTestament)
 }

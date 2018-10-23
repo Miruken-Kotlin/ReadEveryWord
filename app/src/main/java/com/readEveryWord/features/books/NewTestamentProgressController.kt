@@ -10,19 +10,16 @@ import com.readEveryWord.domain.NewTestamentProgress
 
 class NewTestamentProgressController
     @Provides @Scoped
-    constructor(): AndroidController() {
+    constructor(val bible: Bible): AndroidController() {
 
-    lateinit var bible: Bible
-    lateinit var progress: NewTestamentProgress
+    val progress = NewTestamentProgress(bible)
 
-    fun showProgress(data: Bible){
-        bible    = data
-        progress = NewTestamentProgress(bible)
+    fun showProgress() {
         show(R.layout.new_testament_progress, BR.ctrl)
     }
 
-    fun pop (){
-        this.context?.end()
+    fun pop () {
+        endContext()
     }
 }
 

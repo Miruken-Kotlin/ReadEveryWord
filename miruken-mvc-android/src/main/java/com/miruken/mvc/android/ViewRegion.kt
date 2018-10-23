@@ -135,7 +135,7 @@ class ViewRegion(context: Context) :
 
         val fromIndex = fromView?.let { indexOfChild(it) } ?: -1
         if (fromIndex >= 0) {
-            addView(view, fromIndex)
+            addView(view, fromIndex + 1)
         } else {
             addView(view)
         }
@@ -169,11 +169,11 @@ class ViewRegion(context: Context) :
         private var _closed = false
 
         var view: Pair<Viewing, View>? = null
+            private set
 
-        override val index = getLayerIndex(this)
+        override val index get() = getLayerIndex(this)
 
-        override val closed = Event<ViewingLayer>()
-
+        override val closed       = Event<ViewingLayer>()
         override val transitioned = Event<ViewingLayer>()
 
         fun transitionTo(

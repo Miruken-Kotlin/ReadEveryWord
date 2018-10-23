@@ -9,6 +9,7 @@ import com.miruken.context.Context
 import com.miruken.mvc.Navigator
 import com.miruken.mvc.android.ViewRegion
 import com.miruken.mvc.next
+import com.readEveryWord.data.BibleRepository
 import com.readEveryWord.features.books.BookController
 import com.readEveryWord.features.books.BooksController
 import com.readEveryWord.features.books.NewTestamentProgressController
@@ -42,6 +43,7 @@ class MainActivity : AppCompatActivity() {
 }
 
 private fun registerComponents() {
+    HandlerDescriptor.getDescriptor<BibleRepository>()
     HandlerDescriptor.getDescriptor<BookController>()
     HandlerDescriptor.getDescriptor<BooksController>()
     HandlerDescriptor.getDescriptor<NewTestamentProgressController>()

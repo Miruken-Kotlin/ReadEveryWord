@@ -32,10 +32,10 @@ class TableComponent(
         val cell = ViewRegion(table.context)
         val row  = currentRow().apply { addView(cell) }
         return context.addRegion(cell).apply {
-            contextEnding += { _ ->
+            contextEnded += { _ ->
                 removeCell(row, cell)
             }
-            childContextEnding += { _ ->
+            childContextEnded += { _ ->
                 removeCell(row, cell)
             }
         }
