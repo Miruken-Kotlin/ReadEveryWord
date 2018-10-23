@@ -16,7 +16,7 @@ open class AndroidController : Controller() {
     ) = show(ViewLayout(layoutId, bindingId, init))
 
     //Expecting this to go away
-    protected fun <T: ViewDataBinding>bind(view: Int, parent: ViewGroup) : T {
+    protected fun <T: ViewDataBinding> bind(view: Int, parent: ViewGroup) : T {
         val layoutInflater = parent.context.getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE)
                 as LayoutInflater
