@@ -4,6 +4,8 @@ import android.widget.TableLayout
 import android.widget.TableRow
 import com.android.databinding.library.baseAdapters.BR
 import com.miruken.mvc.android.AndroidController
+import com.miruken.mvc.android.component.table
+import com.miruken.mvc.push
 import com.readEveryWord.R
 import com.readEveryWord.domain.Book
 import com.readEveryWord.domain.Chapter
@@ -16,26 +18,15 @@ class ChaptersController : AndroidController()
         book = selectedBook
 
         show(R.layout.chapters_chapter, BR.ctrl){
-            findViewById<TableLayout>(R.id.chapter_table).also {
-                fillTable(it, book.chapters)
-            }
-        }
-    }
-
-    private fun fillTable(table: TableLayout, items: List<Chapter>){
-        table.removeAllViews()
-        val columnCount = 6
-        val rowCount    = items.size/columnCount
-        for (i in 0..rowCount) {
-            val row = TableRow(table.context)
-            table.addView(row)
-            items.drop(i * columnCount).take(columnCount).forEach{
-                ChapterController(book, it).addToView(row)
+            table(this, R.id.chapter_table, 6).apply {
+                 book.chapters.forEach {
+                    add().push<ChaptersController> { showChapters(this.book) }
+                 }
             }
         }
     }
 
     fun pop () {
-
+        this.context?.end()
     }
 }

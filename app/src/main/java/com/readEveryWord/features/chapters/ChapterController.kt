@@ -2,6 +2,7 @@ package com.readEveryWord.features.chapters
 
 import android.content.Context
 import android.view.ViewGroup
+import com.android.databinding.library.baseAdapters.BR
 import com.miruken.callback.resolve
 import com.miruken.mvc.android.AndroidController
 import com.readEveryWord.R
@@ -16,9 +17,8 @@ class ChapterController(
         val book:    Book,
         val chapter: Chapter
 ) : AndroidController() {
-    fun addToView(parent: ViewGroup) {
-        bind<ChaptersChapterBinding>(
-                R.layout.chapters_chapter, parent).ctrl = this
+    fun showChapter(parent: ViewGroup) {
+        show(R.layout.chapters_chapter, BR.ctrl)
     }
     fun markAsRead(){
         createReadingRecord(ReadingRecordData(
