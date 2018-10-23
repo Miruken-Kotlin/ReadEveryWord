@@ -5,11 +5,10 @@ import android.widget.TableRow
 import com.android.databinding.library.baseAdapters.BR
 import com.miruken.mvc.android.AndroidController
 import com.readEveryWord.R
-import com.readEveryWord.databinding.ChaptersBinding
 import com.readEveryWord.domain.Book
 import com.readEveryWord.domain.Chapter
 
-class  ChaptersController : AndroidController()
+class ChaptersController : AndroidController()
 {
     lateinit var book: Book
 
@@ -36,7 +35,7 @@ class  ChaptersController : AndroidController()
         }
     }
 
-    fun pop (){
+    fun pop () {
 
     }
 }

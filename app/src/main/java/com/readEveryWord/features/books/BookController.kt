@@ -12,16 +12,14 @@ class BookController
     @Provides @Scoped
     constructor() : AndroidController() {
 
-    var book: Book? = null
+    lateinit var book: Book
 
-    fun showBook(selectedBook: Book) {
-        book = selectedBook
+    fun showBook(book: Book) {
+        this.book = book
         show(R.layout.books_book, BR.ctrl)
     }
 
     fun goToChapters() {
-        book?.apply {
-            ChaptersController().showChapters(this)
-        }
+        ChaptersController().showChapters(book)
     }
 }
