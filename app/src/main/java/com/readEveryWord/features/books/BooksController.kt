@@ -21,13 +21,13 @@ class BooksController
         show(R.layout.books, BR.ctrl) {
             _oldTestament = table(this, R.id.ot_table, 6).apply {
                 bible.oldTestament.forEach { book ->
-                    add().next<BookController> { showBook(book) }
+                    add().next<BookController> { show(book) }
                 }
             }
 
             _newTestament = table(this, R.id.nt_table, 6).apply {
                 bible.newTestament.forEach { book ->
-                    add().next<BookController> { showBook(book) }
+                    add().next<BookController> { show(book) }
                 }
             }
         }

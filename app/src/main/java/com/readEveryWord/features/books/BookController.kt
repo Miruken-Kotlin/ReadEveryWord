@@ -14,12 +14,14 @@ class BookController
 
     lateinit var book: Book
 
-    fun showBook(book: Book) {
+    fun show(book: Book) {
         this.book = book
         show(R.layout.books_book, BR.ctrl)
     }
 
     fun goToChapters() {
-        push<ChaptersController>{ showChapters(this.book) }
+        push<ChaptersController>{
+            showChapters(this@BookController.book)
+        }
     }
 }
