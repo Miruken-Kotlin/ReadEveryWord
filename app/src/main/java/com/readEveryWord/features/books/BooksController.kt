@@ -34,10 +34,10 @@ class BooksController
     }
 
     fun goToOldTestamentProgress() {
-        push<OldTestamentProgressController> { showProgress() }
+        push<OldTestamentProgressController> { show() }
     }
 
     fun goToNewTestamentProgress() {
-        push<NewTestamentProgressController> { showProgress() }
+        push<NewTestamentProgressController> { show() }
     }
 }

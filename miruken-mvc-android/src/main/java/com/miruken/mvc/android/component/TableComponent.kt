@@ -6,7 +6,7 @@ import android.widget.TableLayout
 import android.widget.TableRow
 import com.miruken.context.Context
 import com.miruken.context.Contextual
-import com.miruken.context.getContext
+import com.miruken.context.requireContext
 import com.miruken.mvc.android.ViewRegion
 import com.miruken.mvc.view.addRegion
 import kotlin.math.ceil
@@ -23,7 +23,7 @@ class TableComponent(
             contextual: Contextual,
             table:      TableLayout,
             columns:    Int
-    ): this(contextual.getContext(true)!!, table, columns)
+    ): this(contextual.requireContext(), table, columns)
 
     init { table.removeAllViews() }
 
