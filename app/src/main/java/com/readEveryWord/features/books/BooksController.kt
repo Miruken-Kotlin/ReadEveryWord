@@ -1,15 +1,10 @@
 package com.readEveryWord.features.books
 
 import android.content.Context
-import android.databinding.BindingAdapter
-import android.view.ViewGroup
 import android.widget.TableLayout
 import android.widget.TableRow
 import com.android.databinding.library.baseAdapters.BR
-import com.miruken.callback.Next
 import com.miruken.callback.Provides
-import com.miruken.callback.toHandler
-import com.miruken.context.Contextual
 import com.miruken.context.Scoped
 import com.miruken.mvc.android.AndroidController
 import com.miruken.mvc.android.ViewRegion
@@ -17,7 +12,7 @@ import com.miruken.mvc.next
 import com.readEveryWord.R
 import com.readEveryWord.data.queries.getAllReadingRecords
 import com.readEveryWord.domain.Bible
-import com.readEveryWord.domain.Book
+import kotlin.math.ceil
 
 class BooksController
     @Provides @Scoped
@@ -33,31 +28,15 @@ class BooksController
 
     fun showBooks() {
         show(R.layout.books, BR.ctrl) {
-            findViewById<TableLayout>(R.id.ot_table).also {
-                fillTable(it, bible.oldTestament)
+            var ot = TableComponent(this@BooksController, findViewById(R.id.ot_table), 6)
+            bible.oldTestament.forEach {
+                ot.add()?.next<BookController> { showBook(it) }
             }
-//
-//            findViewById<TableLayout>(R.id.nt_table).also {
-//                fillTable(it, bible.newTestament)
-//            }
-        }
-    }
 
-    private fun fillTable(table: TableLayout, items: List<Book>){
-        table.removeAllViews()
-        val columnCount = 6
-        val rowCount    = items.size/columnCount
-        for (i in 0..rowCount) {
-            val row = TableRow(table.context)
-            table.addView(row)
-            items.asSequence().drop(i * columnCount)
-                    .take(columnCount)
-                    .toList()
-                    .forEach {
-                        val region = ViewRegion(row.context)
-                        row.addView(region)
-                        region.toHandler().next<BookController> { showBook(it) }
-                    }
+            var nt = TableComponent(this@BooksController, findViewById(R.id.nt_table), 6)
+            bible.newTestament.forEach {
+                nt.add()?.next<BookController> { showBook(it) }
+            }
         }
     }
 
@@ -70,16 +49,34 @@ class BooksController
     }
 }
 
-@BindingAdapter("entries")
-fun <T> setEntries(viewGroup: ViewGroup,
-                   oldEntries: List<T>?,
-                   newEntries: List<T>?) {
+class TableComponent(private val contextual: com.miruken.context.Contextual, val table: TableLayout, val columns: Int) {
 
-    newEntries?.forEach {
-        viewGroup.addView(ViewRegion(viewGroup.context))
+    private val _rows: ArrayList<TableRow> = ArrayList()
+    private var _count = 0
+
+    init{
+        table.removeAllViews()
     }
-}
 
-class TableComponent(contextual: Contextual) {
+    fun add() : com.miruken.context.Context?{
+        _count++
+        var row = currentRow()
+        val region = ViewRegion(row.context)
+        row.addView(region)
+        val childContext = contextual.context?.createChild()
+        childContext?.addHandlers(region)
+        return childContext
+    }
 
+    private fun currentRow() : TableRow {
+        table.childCount
+
+        if(_rows.count() === 0 || ceil(_count.toDouble()/columns) > _rows.count()){
+            val row = TableRow(table.context)
+            _rows.add(row)
+            table.addView(row)
+            return row
+        }
+        return _rows.last()
+    }
 }
