@@ -104,8 +104,10 @@ class Bible : BaseObservable() {
     val revelation   = newTestament.last()
 
     @Bindable
-    var oldTestamentProgress = calculateProgress(oldTestament)
+    var oldTestamentProgress = ""
+        get() = calculateProgress(oldTestament)
 
     @Bindable
-    var newTestamentProgress = calculateProgress(newTestament)
+    var newTestamentProgress = ""
+        get() = calculateProgress(newTestament)
 }
