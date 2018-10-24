@@ -5,14 +5,13 @@ import com.miruken.callback.Provides
 import com.miruken.context.Scoped
 import com.miruken.mvc.android.AndroidController
 import com.miruken.mvc.android.component.table
-import com.miruken.mvc.push
+import com.miruken.mvc.partial
 import com.readEveryWord.R
 import com.readEveryWord.domain.Book
 
 class ChaptersController
     @Provides @Scoped
-    constructor() : AndroidController()
-{
+    constructor() : AndroidController() {
     lateinit var book: Book
 
     fun showChapters(book: Book) {
@@ -21,9 +20,8 @@ class ChaptersController
         show(R.layout.chapters, BR.ctrl) {
             table(this, R.id.chapter_table, 6).apply {
                  book.chapters.forEach { chapter ->
-                    add().push<ChapterController> {
-                        showChapter(book, chapter)
-                    }
+                    add().partial<ChapterController> {
+                        showChapter(book, chapter) }
                  }
             }
         }

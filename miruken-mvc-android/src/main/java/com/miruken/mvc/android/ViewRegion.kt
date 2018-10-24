@@ -131,7 +131,7 @@ class ViewRegion(context: Context) :
             return Promise.EMPTY
         }
 
-        constrain(view)
+        applyConstraints(view)
 
         val fromIndex = fromView?.let { indexOfChild(it) } ?: -1
         if (fromIndex >= 0) {
@@ -156,7 +156,7 @@ class ViewRegion(context: Context) :
         return Promise.EMPTY
     }
 
-    private fun constrain(view: View) = view.apply {
+    private fun applyConstraints(view: View) = view.apply {
         layoutParams = RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.MATCH_PARENT)

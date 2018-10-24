@@ -38,7 +38,7 @@ abstract class ViewContainer(context: Context) :
 
     override fun show(view: Viewing): ViewingLayer {
         val composer = requireComposer()
-        bindView(view)
+        bindView(view, composer)
         return runOnMainThread { show(view, composer) }
     }
 
@@ -88,9 +88,9 @@ abstract class ViewContainer(context: Context) :
         }
     }
 
-    private fun bindView(view: Viewing) {
+    private fun bindView(view: Viewing, composer: Handling) {
         if (view.viewModel != null) return
-        val navigation = requireComposer().resolve<Navigation<*>>()
+        val navigation = composer.resolve<Navigation<*>>()
         navigation?.controller?.also { controller ->
             view.viewModel = controller
             (view as? AutoCloseable)?.also {

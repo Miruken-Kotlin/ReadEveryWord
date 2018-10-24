@@ -6,7 +6,7 @@ import com.miruken.context.Scoped
 import com.miruken.mvc.android.AndroidController
 import com.miruken.mvc.android.component.TableComponent
 import com.miruken.mvc.android.component.table
-import com.miruken.mvc.next
+import com.miruken.mvc.partial
 import com.readEveryWord.R
 import com.readEveryWord.domain.Bible
 
@@ -18,13 +18,13 @@ class BooksController
         show(R.layout.books, BR.ctrl) {
             table(this, R.id.ot_table, 6).apply {
                 bible.oldTestament.forEach { book ->
-                    add().next<BookController> { show(book) }
+                    add().partial<BookController> { show(book) }
                 }
             }
 
             table(this, R.id.nt_table, 6).apply {
                 bible.newTestament.forEach { book ->
-                    add().next<BookController> { show(book) }
+                    add().partial<BookController> { show(book) }
                 }
             }
         }
