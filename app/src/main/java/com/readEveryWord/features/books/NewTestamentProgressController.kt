@@ -14,8 +14,6 @@ class NewTestamentProgressController
 
     val progress = NewTestamentProgress(bible)
 
-    fun show() {
-        show(R.layout.new_testament_progress, BR.ctrl)
-    }
+    fun show() = show(R.layout.new_testament_progress, BR.ctrl)
 }
 

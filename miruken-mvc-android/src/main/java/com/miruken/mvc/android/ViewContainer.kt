@@ -38,7 +38,7 @@ abstract class ViewContainer(context: Context) :
 
     override fun show(view: Viewing): ViewingLayer {
         val composer = requireComposer()
-        bindView(view, composer)
+        bindController(view, composer)
         return runOnMainThread { show(view, composer) }
     }
 
@@ -47,24 +47,12 @@ abstract class ViewContainer(context: Context) :
             composer: Handling
     ): ViewingLayer
 
-    protected fun inflateView(layout: ViewLayout): View {
-        val layoutId = layout.layoutId
-        val view = layout.bindingId?.let {
-            val viewModel = layout.viewModel
-            check(viewModel != null) {
-                "Bindable layout requires a view model"
-            }
-            val inflater = LayoutInflater.from(context)
-            val binding  = DataBindingUtil.inflate<ViewDataBinding>(
-                    inflater, layoutId, this, false)
-            check(binding?.setVariable(
-                    layout.bindingId, viewModel) == true) {
-                "Unable to bind layout with id $layoutId"
-            }
-            binding.root
-        } ?: View.inflate(context, layoutId, null)
-        layout.initView?.invoke(view)
-        return view
+    protected fun inflateView(layout: ViewLayout<*>): View {
+        val inflater = LayoutInflater.from(context)
+        val binding  = DataBindingUtil.inflate<ViewDataBinding>(
+                inflater, layout.layoutId, this, false)
+        layout.bind(binding.root, binding)
+        return binding.root
     }
 
     private fun createView(viewClass: KClass<*>): Viewing? {
@@ -88,7 +76,7 @@ abstract class ViewContainer(context: Context) :
         }
     }
 
-    private fun bindView(view: Viewing, composer: Handling) {
+    private fun bindController(view: Viewing, composer: Handling) {
         if (view.viewModel != null) return
         val navigation = composer.resolve<Navigation<*>>()
         navigation?.controller?.also { controller ->

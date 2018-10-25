@@ -26,7 +26,7 @@ class ViewRegion(context: Context) :
     ): ViewingLayer {
         val newView = when (view) {
             is View -> view
-            is ViewLayout -> inflateView(view)
+            is ViewLayout<*> -> inflateView(view)
             else -> notHandled()
         }
         return transitionTo(newView, view, composer)

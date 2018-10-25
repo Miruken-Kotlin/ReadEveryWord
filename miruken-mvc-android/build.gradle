@@ -37,8 +37,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:27.1.1'
-    api 'com.miruken:miruken:0.0.1-alpha.16'
-    api 'com.miruken:miruken-mvc:0.0.1-alpha.16'
+    api 'com.miruken:miruken:0.0.1-alpha.17'
+    api 'com.miruken:miruken-mvc:0.0.1-alpha.17'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

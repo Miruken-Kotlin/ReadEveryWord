@@ -4,10 +4,10 @@ import com.android.databinding.library.baseAdapters.BR
 import com.miruken.callback.Provides
 import com.miruken.context.Scoped
 import com.miruken.mvc.android.AndroidController
-import com.miruken.mvc.android.component.TableComponent
 import com.miruken.mvc.android.component.table
 import com.miruken.mvc.partial
 import com.readEveryWord.R
+import com.readEveryWord.databinding.BooksBinding
 import com.readEveryWord.domain.Bible
 
 class BooksController
@@ -15,14 +15,14 @@ class BooksController
     constructor(val bible: Bible) : AndroidController() {
 
     fun showBooks() {
-        show(R.layout.books, BR.ctrl) {
-            table(this, R.id.ot_table, 6).apply {
+        bind<BooksBinding>(R.layout.books, BR.ctrl) { b ->
+            table(b.otTable, 6).apply {
                 bible.oldTestament.forEach { book ->
                     add().partial<BookController> { show(book) }
                 }
             }
 
-            table(this, R.id.nt_table, 6).apply {
+            table(b.ntTable, 6).apply {
                 bible.newTestament.forEach { book ->
                     add().partial<BookController> { show(book) }
                 }
@@ -30,11 +30,9 @@ class BooksController
         }
     }
 
-    fun goToOldTestamentProgress() {
+    fun goToOldTestamentProgress() =
         push<OldTestamentProgressController> { show() }
-    }
 
-    fun goToNewTestamentProgress() {
+    fun goToNewTestamentProgress() =
         push<NewTestamentProgressController> { show() }
-    }
 }
