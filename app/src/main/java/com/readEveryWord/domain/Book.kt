@@ -1,8 +1,8 @@
 package com.readEveryWord.domain
 
-import android.databinding.BaseObservable
-import android.databinding.Bindable
-import android.databinding.Observable
+import androidx.databinding.BaseObservable
+import androidx.databinding.Bindable
+import androidx.databinding.Observable
 import com.readEveryWord.BR
 import com.readEveryWord.features.calculateProgress
 

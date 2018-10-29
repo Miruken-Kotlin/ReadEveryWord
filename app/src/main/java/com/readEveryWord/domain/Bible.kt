@@ -1,10 +1,10 @@
 package com.readEveryWord.domain
 
-import android.databinding.BaseObservable
-import android.databinding.Bindable
-import android.databinding.Observable
-import com.android.databinding.library.baseAdapters.BR
+import androidx.databinding.BaseObservable
+import androidx.databinding.Bindable
+import androidx.databinding.Observable
 import com.readEveryWord.features.calculateProgress
+import com.readEveryWord.BR
 
 class Bible : BaseObservable() {
 

@@ -1,12 +1,12 @@
 package com.readEveryWord.features.chapters
 
-import com.android.databinding.library.baseAdapters.BR
 import com.miruken.callback.Provides
 import com.miruken.context.Scoped
 import com.miruken.mvc.android.AndroidController
 import com.miruken.mvc.android.component.table
 import com.miruken.mvc.partial
 import com.readEveryWord.R
+import com.readEveryWord.BR
 import com.readEveryWord.databinding.ChaptersBinding
 import com.readEveryWord.domain.Book
 

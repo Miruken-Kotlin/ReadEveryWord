@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:background   ="@color/lightBackground">
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width ="match_parent"
             android:layout_height="wrap_content">
 
@@ -145,7 +145,7 @@
                 </TableRow>
             </TableLayout>
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </android.widget.ScrollView>
 </layout>

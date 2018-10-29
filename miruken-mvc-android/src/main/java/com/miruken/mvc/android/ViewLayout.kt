@@ -1,8 +1,8 @@
 package com.miruken.mvc.android
 
-import android.databinding.ViewDataBinding
-import android.support.annotation.IdRes
-import android.support.annotation.LayoutRes
+import androidx.databinding.ViewDataBinding
+import androidx.annotation.IdRes
+import androidx.annotation.LayoutRes
 import android.view.View
 import com.miruken.mvc.view.Viewing
 import com.miruken.mvc.view.ViewingRegion

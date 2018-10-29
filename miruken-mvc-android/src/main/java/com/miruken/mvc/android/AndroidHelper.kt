@@ -3,7 +3,7 @@ package com.miruken.mvc.android
 import android.app.Activity
 import android.os.Handler
 import android.os.Looper
-import android.support.annotation.IdRes
+import androidx.annotation.IdRes
 import android.view.View
 import java.util.concurrent.FutureTask
 

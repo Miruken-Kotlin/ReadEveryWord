@@ -1,7 +1,7 @@
 package com.readEveryWord.domain
 
-import android.databinding.BaseObservable
-import android.databinding.Bindable
+import androidx.databinding.BaseObservable
+import androidx.databinding.Bindable
 import com.readEveryWord.BR
 
 class Chapter(val number: Int) : BaseObservable() {
