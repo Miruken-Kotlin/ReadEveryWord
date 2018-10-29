@@ -22,7 +22,7 @@ class ViewLayout<B: ViewDataBinding>(
             "A view model is required to bind the layout"
         }
         check(binding.setVariable(viewModelId, viewModel)) {
-            "Unable to bind view model to layout $layoutId.  Did you forget to add a data variable for the view model"
+            "Unable to bind the view model to layout $layoutId.  Did you forget to add a data variable for the view model"
         }
         @Suppress("UNCHECKED_CAST")
         initView?.invoke(view, binding as B)

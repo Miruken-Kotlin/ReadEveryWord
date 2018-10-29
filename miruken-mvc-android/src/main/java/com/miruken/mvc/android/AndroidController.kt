@@ -8,12 +8,12 @@ open class AndroidController : Controller() {
     protected fun show(
             layoutId:    Int,
             viewModelId: Int,
-            init:      (View.(binding: ViewDataBinding) -> Unit)? = null
+            init:        (View.(binding: ViewDataBinding) -> Unit)? = null
     ) = show(ViewLayout(layoutId, viewModelId, init))
 
     protected fun <B: ViewDataBinding> bind(
             layoutId:    Int,
             viewModelId: Int,
-            init:      (View.(binding: B) -> Unit)? = null
+            init:        (View.(binding: B) -> Unit)? = null
     ) = show(ViewLayout(layoutId, viewModelId, init))
 }
