@@ -1,9 +1,9 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'digital.wup.android-maven-publish'
+apply plugin: 'com.jfrog.bintray'
 
-repositories {
-    jcenter()
-}
+version = '0.0.1-alpha.0001'
 
 android {
     compileSdkVersion 27
@@ -42,4 +42,37 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.android
+            groupId 'com.miruken'
+            artifactId 'miruken-mvc-android'
+            pom.withXml {
+                def properties = asNode().appendNode('properties')
+                properties.appendNode('maven.compiler.source', '1.8')
+                properties.appendNode('maven.compiler.target', '1.8')
+            }
+        }
+    }
+}
+
+bintray {
+    user = System.getenv('BINTRAY_USER')
+    key  = System.getenv('BINTRAY_KEY')
+    publications = ['maven']
+    publish = true
+    pkg {
+        userOrg = 'Miruken'
+        repo = 'MavenPackages'
+        name = 'miruken-mvc-android'
+        userOrg = 'miruken'
+        licenses = ['MIT']
+        vcsUrl = 'https://github.com/Miruken-Kotlin/Miruken-Mvc-Android'
+        version {
+            released = new Date()
+        }
+    }
 }
