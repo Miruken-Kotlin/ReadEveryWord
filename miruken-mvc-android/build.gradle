@@ -2,8 +2,9 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'digital.wup.android-maven-publish'
 apply plugin: 'com.jfrog.bintray'
+apply plugin: 'kotlin-kapt'
 
-version = '0.0.1-alpha.0001'
+version = '0.0.1-alpha.0006'
 
 android {
     compileSdkVersion 28
