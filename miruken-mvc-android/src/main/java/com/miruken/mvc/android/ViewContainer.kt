@@ -38,7 +38,6 @@ abstract class ViewContainer(context: Context) :
 
     override fun show(view: Viewing): ViewingLayer {
         val composer = requireComposer()
-        bindController(view, composer)
         return runOnMainThread { show(view, composer) }
     }
 
@@ -56,33 +55,17 @@ abstract class ViewContainer(context: Context) :
     }
 
     private fun createView(viewClass: KClass<*>): Viewing? {
-        if (!viewClass.isSubclassOf(Viewing::class)) {
+        if (!viewClass.isSubclassOf(Viewing::class) ||
+                viewClass.java.isInterface ||
+                viewClass.isAbstract) {
             return null
         }
-        val viewImplClass = when {
-            viewClass.java.isInterface ||
-            viewClass.isAbstract -> this::class.takeIf {
-                it.isSubclassOf(viewClass)
-            } ?: return null
-            else -> viewClass
-        }
-        return viewImplClass.constructors.firstOrNull {
+        return viewClass.constructors.firstOrNull {
             it.parameters.size == 1 &&
             it.parameters[0].type.classifier == Context::class
         }?.let {
             runOnMainThread {
                 it.call(context) as Viewing
-            }
-        }
-    }
-
-    private fun bindController(view: Viewing, composer: Handling) {
-        if (view.viewModel != null) return
-        val navigation = composer.resolve<Navigation<*>>()
-        navigation?.controller?.also { controller ->
-            view.viewModel = controller
-            (view as? AutoCloseable)?.also {
-                controller.context?.dispose(it)
             }
         }
     }
