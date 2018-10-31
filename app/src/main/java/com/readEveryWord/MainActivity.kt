@@ -48,8 +48,8 @@ private fun registerComponents() {
     HandlerDescriptor.getDescriptor<BibleRepository>()
     HandlerDescriptor.getDescriptor<BookController>()
     HandlerDescriptor.getDescriptor<BooksController>()
-    HandlerDescriptor.getDescriptor<NewTestamentProgressController>()
-    HandlerDescriptor.getDescriptor<OldTestamentProgressController>()
     HandlerDescriptor.getDescriptor<ChaptersController>()
     HandlerDescriptor.getDescriptor<ChapterController>()
+    HandlerDescriptor.getDescriptor<NewTestamentProgressController>()
+    HandlerDescriptor.getDescriptor<OldTestamentProgressController>()
 }

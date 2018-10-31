@@ -1,6 +1,7 @@
 package com.readEveryWord.features.books
 
 import com.miruken.callback.Provides
+import com.miruken.callback.provide
 import com.miruken.context.Scoped
 import com.miruken.mvc.android.AndroidController
 import com.miruken.mvc.android.component.table
@@ -18,13 +19,17 @@ class BooksController
         bind<BooksBinding>(R.layout.books, BR.ctrl) { b ->
             table(b.otTable, 6).apply {
                 bible.oldTestament.forEach { book ->
-                    add().partial<BookController> { show(book) }
+                    add().provide(book).partial<BookController> {
+                        showBook()
+                    }
                 }
             }
 
             table(b.ntTable, 6).apply {
                 bible.newTestament.forEach { book ->
-                    add().partial<BookController> { show(book) }
+                    add().provide(book).partial<BookController> {
+                        showBook()
+                    }
                 }
             }
         }

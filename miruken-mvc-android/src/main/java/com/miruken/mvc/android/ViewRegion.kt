@@ -28,11 +28,6 @@ class ViewRegion(context: Context) :
     override fun show(
             view:     Viewing,
             composer: Handling
-    ) = transitionTo(view, composer)
-
-    private fun transitionTo(
-            viewing:  Viewing,
-            composer: Handling
     ): ViewingLayer {
         var push         = false
         var overlay      = false
@@ -76,8 +71,8 @@ class ViewRegion(context: Context) :
         }
 
         return (layer ?: activeLayer)?.apply {
-            val view = bindView(viewing, this, navigation)
-            transitionTo(viewing to view, options, composer)
+            val bv = bindView(view, this, navigation)
+            transitionTo(view to bv, options, composer)
         } ?: error("Unable to determine the view layer")
     }
 

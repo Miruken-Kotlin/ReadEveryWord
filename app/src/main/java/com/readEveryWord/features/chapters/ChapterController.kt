@@ -11,17 +11,12 @@ import com.readEveryWord.domain.Chapter
 
 class ChapterController
     @Provides @Scoped constructor(
+            val         book:       Book,
+            val         chapter:    Chapter,
             private val repository: BibleRepository
     ) : AndroidController() {
 
-    private lateinit var book: Book
-
-    lateinit var chapter: Chapter
-
-    fun showChapter(book: Book, chapter: Chapter) {
-        this.book    = book
-        this.chapter = chapter
-
+    fun showChapter() {
         show(R.layout.chapters_chapter, BR.ctrl)
     }
 

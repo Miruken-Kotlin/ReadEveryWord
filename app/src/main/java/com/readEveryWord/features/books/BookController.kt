@@ -3,25 +3,20 @@ package com.readEveryWord.features.books
 import com.miruken.callback.Provides
 import com.miruken.context.Scoped
 import com.miruken.mvc.android.AndroidController
-import com.readEveryWord.R
 import com.readEveryWord.BR
-import com.readEveryWord.features.chapters.ChaptersController
+import com.readEveryWord.R
 import com.readEveryWord.domain.Book
+import com.readEveryWord.features.chapters.ChaptersController
 
 class BookController
     @Provides @Scoped
-    constructor() : AndroidController() {
+    constructor(@Provides val book: Book) : AndroidController() {
 
-    lateinit var book: Book
-
-    fun show(book: Book) {
-        this.book = book
+    fun showBook() {
         show(R.layout.books_book, BR.ctrl)
     }
 
     fun goToChapters() {
-        push<ChaptersController>{
-            showChapters(this@BookController.book)
-        }
+        push<ChaptersController> { showChapters() }
     }
 }
