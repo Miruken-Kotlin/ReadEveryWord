@@ -17,7 +17,7 @@ class ChaptersController
 
     fun showChapters() {
         bind<ChaptersBinding>(R.layout.chapters, BR.ctrl) { b ->
-            table(b.chapterTable, 6).apply {
+            table(b.chapterTable, columns = 6).apply {
                  book.chapters.forEach { chapter ->
                     addCell().provide(chapter)
                        .partial<ChapterController> { showChapter() }
