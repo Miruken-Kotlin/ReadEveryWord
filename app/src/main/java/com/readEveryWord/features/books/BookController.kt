@@ -11,15 +11,13 @@ import com.readEveryWord.features.chapters.ChaptersController
 
 class BookController
     @Provides @Scoped
-    constructor(val book: Book) : AndroidController() {
+    constructor(@Provides val book: Book) : AndroidController() {
 
     fun showBook() {
         show(R.layout.books_book, BR.ctrl)
     }
 
     fun goToChapters() {
-        push<ChaptersController>(context!!.provide(book)) {
-            showChapters()
-        }
+        push<ChaptersController> { showChapters() }
     }
 }
