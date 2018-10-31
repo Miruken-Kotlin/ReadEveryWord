@@ -60,14 +60,6 @@ class ViewRegion(context: Context) :
             } else {
                 pushLayer()
             }
-            composer.resolve<com.miruken.context.Context>()?.also {
-                it.contextEnding += { _ ->
-                    // allows ending animation
-                    if (_layers.isNotEmpty()) {
-                        layer!!.close()
-                    }
-                }
-            }
         }
 
         return (layer ?: activeLayer)?.apply {
