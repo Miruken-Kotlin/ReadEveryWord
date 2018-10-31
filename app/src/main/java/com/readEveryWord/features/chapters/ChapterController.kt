@@ -11,9 +11,9 @@ import com.readEveryWord.domain.Chapter
 
 class ChapterController
     @Provides @Scoped constructor(
-            val         book:       Book,
-            val         chapter:    Chapter,
-            private val repository: BibleRepository
+            val           book:       Book,
+            @Provides val chapter:    Chapter,
+            private val   repository: BibleRepository
     ) : AndroidController() {
 
     fun showChapter() {

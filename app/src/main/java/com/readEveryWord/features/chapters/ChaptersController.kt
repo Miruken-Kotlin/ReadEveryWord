@@ -13,17 +13,14 @@ import com.readEveryWord.domain.Book
 
 class ChaptersController
     @Provides @Scoped
-    constructor(val book: Book) : AndroidController() {
+    constructor(@Provides val book: Book) : AndroidController() {
 
     fun showChapters() {
         bind<ChaptersBinding>(R.layout.chapters, BR.ctrl) { b ->
             table(b.chapterTable, 6).apply {
                  book.chapters.forEach { chapter ->
-                    add().provide(book)
-                         .provide(chapter)
-                         .partial<ChapterController> {
-                             showChapter()
-                         }
+                    addCell().provide(chapter)
+                       .partial<ChapterController> { showChapter() }
                  }
             }
         }

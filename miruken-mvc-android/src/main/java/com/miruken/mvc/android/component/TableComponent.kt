@@ -27,7 +27,7 @@ class TableComponent(
 
     init { table.removeAllViews() }
 
-    fun add(): Context {
+    fun addCell(): Context {
         _count++
         val cell = ViewRegion(table.context)
         val row  = currentRow().apply { addView(cell) }

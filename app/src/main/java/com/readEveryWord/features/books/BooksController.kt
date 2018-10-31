@@ -19,17 +19,15 @@ class BooksController
         bind<BooksBinding>(R.layout.books, BR.ctrl) { b ->
             table(b.otTable, 6).apply {
                 bible.oldTestament.forEach { book ->
-                    add().provide(book).partial<BookController> {
-                        showBook()
-                    }
+                    addCell().provide(book)
+                        .partial<BookController> { showBook() }
                 }
             }
 
             table(b.ntTable, 6).apply {
                 bible.newTestament.forEach { book ->
-                    add().provide(book).partial<BookController> {
-                        showBook()
-                    }
+                    addCell().provide(book)
+                        .partial<BookController> { showBook() }
                 }
             }
         }
