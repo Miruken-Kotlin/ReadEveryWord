@@ -1,17 +1,14 @@
 package com.miruken.mvc.android
 
 import android.content.Context
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.RelativeLayout
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import com.miruken.callback.Handling
 import com.miruken.callback.notHandled
 import com.miruken.callback.requireComposer
-import com.miruken.callback.resolve
-import com.miruken.context.dispose
-import com.miruken.mvc.Navigation
 import com.miruken.mvc.view.Viewing
 import com.miruken.mvc.view.ViewingLayer
 import com.miruken.mvc.view.ViewingRegion
@@ -46,7 +43,12 @@ abstract class ViewContainer(context: Context) :
             composer: Handling
     ): ViewingLayer
 
-    protected fun inflateView(layout: ViewLayout<*>): View {
+    protected fun inflateLayout(layout: ViewLayout): View =
+        View.inflate(context, layout.layoutId, this).apply {
+            layout.init(this)
+        }
+
+    protected fun inflateBinding(layout: ViewBindingLayout<*>): View {
         val inflater = LayoutInflater.from(context)
         val binding  = DataBindingUtil.inflate<ViewDataBinding>(
                 inflater, layout.layoutId, this, false)

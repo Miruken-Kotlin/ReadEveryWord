@@ -167,7 +167,8 @@ class ViewRegion(context: Context) :
         }
         return when (view) {
             is View -> view
-            is ViewLayout<*> -> inflateView(view)
+            is ViewLayout -> inflateLayout(view)
+            is ViewBindingLayout<*> -> inflateBinding(view)
             else -> notHandled()
         }
     }
