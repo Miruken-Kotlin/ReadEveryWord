@@ -4,7 +4,7 @@ apply plugin: 'digital.wup.android-maven-publish'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'kotlin-kapt'
 
-version = '0.0.1-alpha.0006'
+version = '0.0.1-alpha.0007'
 
 android {
     compileSdkVersion 28
@@ -38,8 +38,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.0.0'
-    api 'com.miruken:miruken:0.0.1-alpha.28'
-    api 'com.miruken:miruken-mvc:0.0.1-alpha.28'
+    api 'com.miruken:miruken:0.0.1-alpha.29'
+    api 'com.miruken:miruken-mvc:0.0.1-alpha.29'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
