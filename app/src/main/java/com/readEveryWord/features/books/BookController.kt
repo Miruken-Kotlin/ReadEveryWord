@@ -1,7 +1,6 @@
 package com.readEveryWord.features.books
 
 import com.miruken.callback.Provides
-import com.miruken.callback.provide
 import com.miruken.context.Scoped
 import com.miruken.mvc.android.AndroidController
 import com.readEveryWord.BR
