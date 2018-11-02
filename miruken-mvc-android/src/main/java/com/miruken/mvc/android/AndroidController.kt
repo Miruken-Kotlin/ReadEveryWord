@@ -16,7 +16,7 @@ open class AndroidController : Controller() {
             init:        (View.(binding: ViewDataBinding) -> Unit)? = null
     ) = show(ViewBindingLayout(layoutId, viewModelId, init))
 
-    protected fun <B: ViewDataBinding> bind(
+    protected fun <B: ViewDataBinding> showb(
             layoutId:    Int,
             viewModelId: Int,
             init:        (View.(binding: B) -> Unit)? = null

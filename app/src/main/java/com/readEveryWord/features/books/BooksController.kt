@@ -16,7 +16,7 @@ class BooksController
     constructor(val bible: Bible) : AndroidController() {
 
     fun showBooks() {
-        bind<BooksBinding>(R.layout.books, BR.ctrl) { b ->
+        showb<BooksBinding>(R.layout.books, BR.ctrl) { b ->
             table(b.otTable, columns = 6).apply {
                 bible.oldTestament.forEach { book ->
                     addCell().provide(book)
