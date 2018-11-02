@@ -44,7 +44,7 @@ abstract class ViewContainer(context: Context) :
     ): ViewingLayer
 
     protected fun inflateLayout(layout: ViewLayout): View =
-        View.inflate(context, layout.layoutId, this).apply {
+        View.inflate(context, layout.layoutId, null).apply {
             layout.init(this)
         }
 
