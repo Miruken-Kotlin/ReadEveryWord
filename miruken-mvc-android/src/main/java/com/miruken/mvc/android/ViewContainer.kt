@@ -3,7 +3,7 @@ package com.miruken.mvc.android
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.RelativeLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.miruken.callback.Handling
@@ -18,7 +18,7 @@ import kotlin.reflect.full.isSubclassOf
 import kotlin.reflect.jvm.jvmErasure
 
 abstract class ViewContainer(context: Context) :
-        RelativeLayout(context), ViewingRegion, Viewing {
+        ConstraintLayout(context), ViewingRegion, Viewing {
     override var viewModel: Any? = null
 
     override fun display(region: ViewingRegion) =
