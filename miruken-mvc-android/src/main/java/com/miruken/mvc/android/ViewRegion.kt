@@ -1,6 +1,7 @@
 package com.miruken.mvc.android
 
 import android.content.Context
+import android.util.AttributeSet
 import android.view.View
 import android.widget.RelativeLayout
 import com.miruken.callback.Handling
@@ -14,8 +15,23 @@ import com.miruken.mvc.option.RegionOptions
 import com.miruken.mvc.view.*
 import java.time.Duration
 
-class ViewRegion(context: Context) :
-        ViewContainer(context), ViewingStackView {
+class ViewRegion : ViewContainer, ViewingStackView {
+
+    constructor(
+            context: Context?
+    ) : super(context)
+
+    constructor(
+            context: Context?,
+            attrs:   AttributeSet?
+    ) : super(context, attrs)
+
+    constructor(
+            context:      Context?,
+            attrs:        AttributeSet?,
+            defStyleAttr: Int
+    ) : super(context, attrs, defStyleAttr)
+
     private val _layers    = mutableListOf<ViewLayer>()
     private var _unwinding = false
     private var _isChild   = false

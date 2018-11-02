@@ -1,6 +1,7 @@
 package com.miruken.mvc.android
 
 import android.content.Context
+import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -17,8 +18,24 @@ import kotlin.reflect.KType
 import kotlin.reflect.full.isSubclassOf
 import kotlin.reflect.jvm.jvmErasure
 
-abstract class ViewContainer(context: Context) :
-        ConstraintLayout(context), ViewingRegion, Viewing {
+abstract class ViewContainer :
+        ConstraintLayout, ViewingRegion, Viewing {
+
+    constructor(
+            context: Context?
+    ) : super(context)
+
+    constructor(
+            context: Context?,
+            attrs: AttributeSet?
+    ) : super(context, attrs)
+
+    constructor(
+            context: Context?,
+            attrs: AttributeSet?,
+            defStyleAttr: Int
+    ) : super(context, attrs, defStyleAttr)
+
     override var viewModel: Any? = null
 
     override fun display(region: ViewingRegion) =
