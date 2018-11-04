@@ -16,12 +16,12 @@ class ChaptersController
     constructor(@Provides val book: Book) : AndroidController() {
 
     fun showChapters() {
-        showb<ChaptersBinding>(R.layout.chapters, BR.ctrl) { b ->
+        show<ChaptersBinding>(R.layout.chapters, BR.ctrl) { b ->
             table(b.chapterTable, columns = 6).apply {
-                 book.chapters.forEach { chapter ->
+                book.chapters.forEach { chapter ->
                     addCell().provide(chapter)
-                       .partial<ChapterController> { showChapter() }
-                 }
+                            .partial<ChapterController> { showChapter() }
+                }
             }
         }
     }

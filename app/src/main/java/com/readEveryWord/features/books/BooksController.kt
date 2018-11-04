@@ -16,18 +16,18 @@ class BooksController
     constructor(val bible: Bible) : AndroidController() {
 
     fun showBooks() {
-        showb<BooksBinding>(R.layout.books, BR.ctrl) { b ->
+        show<BooksBinding>(R.layout.books, BR.ctrl) { b ->
             table(b.otTable, columns = 6).apply {
                 bible.oldTestament.forEach { book ->
                     addCell().provide(book)
-                        .partial<BookController> { showBook() }
+                            .partial<BookController> { showBook() }
                 }
             }
 
             table(b.ntTable, columns = 6).apply {
                 bible.newTestament.forEach { book ->
                     addCell().provide(book)
-                        .partial<BookController> { showBook() }
+                            .partial<BookController> { showBook() }
                 }
             }
         }

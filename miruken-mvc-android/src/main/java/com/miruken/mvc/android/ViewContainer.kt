@@ -27,12 +27,12 @@ abstract class ViewContainer :
 
     constructor(
             context: Context?,
-            attrs: AttributeSet?
+            attrs:   AttributeSet?
     ) : super(context, attrs)
 
     constructor(
-            context: Context?,
-            attrs: AttributeSet?,
+            context:      Context?,
+            attrs:        AttributeSet?,
             defStyleAttr: Int
     ) : super(context, attrs, defStyleAttr)
 

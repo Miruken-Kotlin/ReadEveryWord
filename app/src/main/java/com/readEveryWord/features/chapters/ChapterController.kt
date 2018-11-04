@@ -17,7 +17,7 @@ class ChapterController
     ) : AndroidController() {
 
     fun showChapter() {
-        show(R.layout.chapters_chapter, BR.ctrl)
+        showRes(R.layout.chapters_chapter, BR.ctrl)
     }
 
     fun markAsRead() {

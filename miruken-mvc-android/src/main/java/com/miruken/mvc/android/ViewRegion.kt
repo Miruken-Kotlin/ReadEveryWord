@@ -16,6 +16,9 @@ import com.miruken.mvc.view.*
 import java.time.Duration
 
 class ViewRegion : ViewContainer, ViewingStackView {
+    private val _layers    = mutableListOf<ViewLayer>()
+    private var _unwinding = false
+    private var _isChild   = false
 
     constructor(
             context: Context?
@@ -32,11 +35,7 @@ class ViewRegion : ViewContainer, ViewingStackView {
             defStyleAttr: Int
     ) : super(context, attrs, defStyleAttr)
 
-    private val _layers    = mutableListOf<ViewLayer>()
-    private var _unwinding = false
-    private var _isChild   = false
-
-    private val activeView = activeLayer?.view
+    val activeView get() = activeLayer?.view
 
     override fun createViewStack() =
             ViewRegion(context).apply { _isChild = true }
