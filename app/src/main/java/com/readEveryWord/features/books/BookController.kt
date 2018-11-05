@@ -13,7 +13,7 @@ class BookController
     constructor(@Provides val book: Book) : AndroidController() {
 
     fun showBook() {
-        showRes(R.layout.books_book, BR.ctrl)
+        showR(R.layout.books_book, BR.ctrl)
     }
 
     fun goToChapters() {

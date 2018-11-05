@@ -6,24 +6,24 @@ import com.miruken.callback.Handling
 import com.miruken.mvc.Controller
 
 open class AndroidController : Controller() {
-    protected fun showRes(
+    protected fun showR(
             layoutId: Int,
             init:     (View.() -> Unit)? = null
     ) = show(ViewLayout(layoutId, init))
 
-    protected fun showRes(
+    protected fun showR(
             handler:  Handling,
             layoutId: Int,
             init:     (View.() -> Unit)? = null
     ) = show(handler, ViewLayout(layoutId, init))
 
-    protected fun showRes(
+    protected fun showR(
             layoutId:    Int,
             viewModelId: Int,
             init:        (View.(binding: ViewDataBinding) -> Unit)? = null
     ) = show(ViewBindingLayout(layoutId, viewModelId, init))
 
-    protected fun showRes(
+    protected fun showR(
             handler:     Handling,
             layoutId:    Int,
             viewModelId: Int,
