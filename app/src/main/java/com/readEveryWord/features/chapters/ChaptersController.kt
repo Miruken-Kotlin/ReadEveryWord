@@ -1,7 +1,7 @@
 package com.readEveryWord.features.chapters
 
 import com.miruken.callback.Provides
-import com.miruken.callback.provide
+import com.miruken.callback.with
 import com.miruken.context.Scoped
 import com.miruken.mvc.android.AndroidController
 import com.miruken.mvc.android.component.table
@@ -19,7 +19,7 @@ class ChaptersController
         show<ChaptersBinding>(R.layout.chapters, BR.ctrl) { b ->
             table(b.chapterTable, columns = 6).apply {
                 book.chapters.forEach { chapter ->
-                    addCell().provide(chapter)
+                    addCell().with(chapter)
                             .partial<ChapterController> { showChapter() }
                 }
             }
