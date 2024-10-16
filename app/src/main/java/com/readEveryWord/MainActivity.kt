@@ -17,6 +17,7 @@ import com.readEveryWord.features.books.NewTestamentProgressController
 import com.readEveryWord.features.books.OldTestamentProgressController
 import com.readEveryWord.features.chapters.ChapterController
 import com.readEveryWord.features.chapters.ChaptersController
+import com.readEveryWord.features.person.PersonController
 
 class MainActivity : AppCompatActivity() {
     private val appContext = Context()
@@ -33,7 +34,7 @@ class MainActivity : AppCompatActivity() {
                 Navigator(mainRegion),
                 TypeHandlers)
 
-        appContext.next<BooksController> { showBooks() }
+        appContext.next<PersonController> { editPerson() }
         setContentView(mainRegion)
     }
 
@@ -52,4 +53,5 @@ private fun registerComponents() {
     HandlerDescriptor.getDescriptor<ChapterController>()
     HandlerDescriptor.getDescriptor<NewTestamentProgressController>()
     HandlerDescriptor.getDescriptor<OldTestamentProgressController>()
+    HandlerDescriptor.getDescriptor<PersonController>()
 }
